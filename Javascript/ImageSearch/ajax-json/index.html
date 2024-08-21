@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AJAX and JSON</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <script
+      type="text/javascript"
+      defer
+      src="js/vendor/jquery-3.6.0.js"
+    ></script>
+    <script type="text/javascript" defer src="js/main.js"></script>
+  </head>
+
+  <body>
+    <form
+      name="requestImagesForm"
+      id="requestImagesForm"
+      title="Request Images"
+      action="mailto:WeusijanaBabaKofi@fhda.edu"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label for="searchTags">Tags(separated by commas):</label>
+      <input
+        name="searchTags"
+        type="text"
+        id="searchTags"
+        title="Tags"
+        value="Climate Change"
+        maxlength="80"
+      />
+      <input type="submit" name="submit" id="submit" value="Submit" />
+    </form>
+    <button class="btn-toggle">Toggle Dark-Mode</button>
+    <div id="images"></div>
+  </body>
+</html>

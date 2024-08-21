@@ -1,0 +1,145 @@
+// Hello
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- test framework css -->
+    <link rel="stylesheet" href="js/test/lib/jasmine-2.1.3/jasmine.css" />
+
+    <!-- test framework javascript -->
+    <script src="js/test/lib/jasmine-2.1.3/jasmine.js"></script>
+    <script src="js/test/lib/jasmine-2.1.3/jasmine-html.js"></script>
+    <script src="js/test/lib/jasmine-2.1.3/boot.js"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>A Basic Calculator (Inline)</title>
+    <meta name="description" content="A Basic Calculator" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <!-- Replace "Your Name Goes Here!" with your first and last name, thanks! -->
+    <h1>Xinyu Guo, Wolfgang Edholm</h1>
+
+    <div id="content">
+      <div id="calculator-container">
+        <!-- The name of the form is "calc" -->
+        <form name="calc">
+          <label for="output">A Basic Calculator</label>
+          <!-- the name of the following textbox is "output" and it's value property is the text it shows-->
+
+          <!-- Added onclick events for all number and operation buttons.
+              When clicked, onclick method will parse the id of the clicked button to the
+              current value of the output string -->
+          <input id="output" name="output" type="text" readonly /> <br />
+          <input
+            type="button"
+            id="1"
+            value="  1  "
+            onclick="calc.output.value = calc.output.value + this.id"
+          />
+          <input
+            type="button"
+            id="2"
+            value="  2  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="3"
+            value="  3  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="+"
+            value="  +  "
+            onclick="calc.output.value += this.id"
+          />
+          <br />
+          <input
+            type="button"
+            id="4"
+            value="  4  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="5"
+            value="  5  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="6"
+            value="  6  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="-"
+            value="  -  "
+            onclick="calc.output.value += this.id"
+          />
+          <br />
+          <input
+            type="button"
+            id="7"
+            value="  7  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="8"
+            value="  8  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="9"
+            value="  9  "
+            onclick="calc.output.value += this.id"
+          />
+          <input
+            type="button"
+            id="*"
+            value="  x  "
+            onclick="calc.output.value += this.id"
+          />
+          <br />
+          <input
+            type="button"
+            id="c"
+            value="  C  "
+            onclick="calc.output.value = ''"
+          />
+          <input
+            type="button"
+            id="0"
+            value="  0  "
+            onclick="calc.output.value += this.id"
+          />
+          <!-- Use the math.eval() function from the Math.js math library to parse and evaluate the String with mathematics in it -->
+          <input
+            type="button"
+            id="equate"
+            value="  =  "
+            onclick="calc.output.value = math.eval(calc.output.value)"
+          />
+          <input
+            type="button"
+            id="/"
+            value="&divide;"
+            onclick="calc.output.value += this.id"
+          />
+        </form>
+      </div>
+      <h2>Part 1 Inline Version</h2>
+    </div>
+    <!-- source files -->
+    <script src="js/vendor/math.js"></script>
+    <!-- test spec files -->
+    <script src="js/test/inlineSpec.js"></script>
+  </body>
+</html>

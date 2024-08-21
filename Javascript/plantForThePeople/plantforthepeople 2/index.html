@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Reporting a Planting</title>
+    <link rel="stylesheet" href="css/form.css" />
+    <link
+      href="js/vendor/jquery-ui-1.11.3.custom/jquery-ui.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="js/vendor/jquery-timepicker/jquery.timepicker.css"
+    />
+    <link
+      rel="stylesheet"
+      href="js/vendor/intl-tel-input-master/build/css/intlTelInput.css"
+    />
+    <script defer src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script
+      defer
+      src="js/vendor/jquery-ui-1.11.3.custom/external/jquery/jquery.js"
+    ></script>
+    <script defer src="js/vendor/jquery-ui-1.11.3.custom/jquery-ui.js"></script>
+    <script
+      defer
+      src="js/vendor/jquery-timepicker/jquery.timepicker.js"
+    ></script>
+    <script
+      defer
+      src="js/vendor/intl-tel-input-master/build/js/intlTelInput.js"
+    ></script>
+    <script
+      defer
+      src="js/vendor/jquery-validation-1.13.1/dist/jquery.validate.js"
+    ></script>
+    <script
+      defer
+      src="js/vendor/jquery-validation-1.13.1/dist/additional-methods.js"
+    ></script>
+    <script defer src="js/form.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Our Goal:</h1>
+      <p style="font-weight: bold">
+        Plant a trillion trees. How would that have a big an impact on global
+        climate change?
+      </p>
+      <p>
+        Half of all photosynthetic activity on this planet is by phytoplankton
+        in the ocean, the other half by trees and other plants on land.
+      </p>
+      <p>
+        Each tree can bind 10 kg of CO2 per year in average. If we reach our
+        goal of 1000 billion trees, these trees will bind 10 billion tons of
+        CO2. Today we humans produce and exhaust by our fossil usage over 33
+        billion tons of CO2 a year. As the CO2 emissions are unfortunately
+        increasing these additional trees will absorb a quarter of the human
+        made CO2 emissions. Tree planting is not enough, but it is easy and it
+        is an important first step. In addition we have to reduce our CO2
+        emissions and have to share the remaining budget justly among the
+        world's citizens.
+      </p>
+      <p>
+        If every person is planting 150 trees we can easily reach the 1000
+        Billion Tree goal!
+        <a
+          href="https://www1.plant-for-the-planet.org/california-camp-fire-restoration"
+          target="_blank"
+          >Join us</a
+        >
+        and together we can make a difference.
+      </p>
+      <p>
+        Paraphrased from:
+        <a
+          href="http://www.plant-for-the-planet.org/media/files/download/three_point_plan_20141104.pdf"
+          target="_blank"
+          >3 Point Plan</a
+        >
+        and
+        <a href="https://a.plant-for-the-planet.org/" target="_blank"
+          >About Us: Plant For The Planet</a
+        >
+      </p>
+      <p style="font-weight: bold">The Scientific Evidence</p>
+      <p>
+        In September 2015, the renowned scientific journal Nature published a
+        <a
+          href="https://www.plant-for-the-planet.org/media/download/cms/media/waldstudie/crowther-et-al.-2015-article.pdf"
+          target="_blank"
+          >study</a
+        >
+        that the children had initiated. Dr. Tom Crowther from Yale University
+        had for the first time researched the number of trees growing in the
+        world ("Mapping tree density at a global scale"). There are about 3
+        trillion! He also proved to the children that there is space for a
+        further trillion trees that can be planted without competing with
+        agriculture or settlements. The goal of the children is scientifically
+        substantiated!
+      </p>
+    </header>
+    <main class="wrapper" role="main" id="content">
+      <h1>So you planted a new plant? Congrats!</h1>
+      <form
+        id="post_plant"
+        name="post_plant"
+        onsubmit="return processFormData(event);"
+        action="mailto:WeusijanaBabaKofi@fhda.edu"
+        method="POST"
+        enctype="text/plain"
+      >
+        <hr />
+        <h2 class="hdr-account" style="font-weight: bold">
+          Tell us all about it:
+        </h2>
+        <label for="plant_pic_url" style="font-weight: bold"
+          ><span class="required">*</span>URL to a picture:</label
+        >
+        <input
+          id="plant_pic_url"
+          name="plant_pic_url"
+          title="URL for Picture"
+          type="url"
+          required="required"
+          autofocus
+          size="70"
+        />
+        <br />
+        <label for="plant_media_url" style="font-weight: bold"
+          >URL to video or audio media (optional):</label
+        >
+        <input
+          id="plant_media_url"
+          name="plant_media_url"
+          title="Media URL"
+          type="url"
+          autofocus
+          size="70"
+        />
+        <br />
+        <label for="description"
+          >Describe the new plant(s) and the story about the planting! <br />
+          <span style="font-weight: bold"
+            ><span class="required">*</span>Description:</span
+          >
+          <br />
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          title="Description"
+          cols="70"
+          rows="10"
+          required="required"
+        ></textarea>
+        <br />
+        <hr />
+        <h2 class="hdr-address">Planting Location:</h2>
+        <div class="fields">
+          <div class="row">
+            <label for="street-address">Street Address:</label>
+            <input
+              type="text"
+              id="street-address"
+              title="Street Address"
+              name="street_address"
+              class="field-large"
+            />
+            <select name="unit-type" id="unit-type" for="unit">
+              <option value="apartment">Apartment</option>
+              <option value="unit">Unit</option>
+              <option value="suite">Suite</option>
+              <option value="room">Room</option>
+            </select>
+            <input name="unit" type="text" title="Unit" id="unit" size="5" />
+          </div>
+          <div class="row">
+            <label for="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              title="City"
+              name="city"
+              class="field-large"
+            />
+          </div>
+          <div class="row">
+            <label for="state">State:</label>
+            <select id="state" title="State" name="state">
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="DC">District Of Columbia</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="IA">Iowa</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="ME">Maine</option>
+              <option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option>
+              <option value="MT">Montana</option>
+              <option value="NE">Nebraska</option>
+              <option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VT">Vermont</option>
+              <option value="VA">Virginia</option>
+              <option value="WA">Washington</option>
+              <option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WY">Wyoming</option>
+              <option value="AS">American Samoa</option>
+              <option value="GU">Guam</option>
+              <option value="MP">Northern Mariana Islands</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="UM">United States Minor Outlying Islands</option>
+              <option value="VI">Virgin Islands</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="zip-code">ZIP Code:</label>
+            <input
+              type="text"
+              id="zip-code"
+              name="zip_code"
+              pattern="\d{5}"
+              class="field-small"
+              size="5"
+              maxlength="5"
+              title="5-digit ZIP code number"
+              placeholder="#####"
+            />
+          </div>
+          <div class="row">
+            (<label for="lat">Latitude:</label>
+            <input
+              name="lat"
+              type="number"
+              id="lat"
+              max="90"
+              min="-90"
+              step=".000001"
+              title="Latitudes range from -90 to 90"
+            />
+            , <label for="lng">Longitude:</label>
+            <input
+              name="lng"
+              type="number"
+              id="lng"
+              max="180"
+              min="-180"
+              step=".000001"
+              title="Longitudes range from -180 to 180"
+            />
+            )
+          </div>
+        </div>
+
+        <br />
+        <hr />
+        <label for="planting_date" style="font-weight: bold"
+          ><span class="required">*</span>Date of Planting:</label
+        >
+        <input
+          name="planting_date"
+          type="date"
+          required
+          id="planting_date"
+          autocomplete="on"
+          placeholder="YYYY-MM-DD"
+          data-date-format="YYYY-MM-DD"
+        />
+        <br />
+        <label for="planting_time" style="font-weight: bold"
+          ><span class="required">*</span>Time of Planting:</label
+        >
+        <input
+          name="planting_time"
+          type="time"
+          required
+          id="planting_time"
+          autocomplete="on"
+          placeholder="HH:MM:SS"
+          data-time-format="H:i:s"
+        />
+        <br />
+        <hr />
+        <h2 class="hdr-account">Your Information</h2>
+        <div class="fields">
+          <p class="row">
+            <label for="first-name"
+              ><span class="required">*</span>First/Given Name:</label
+            >
+            <input
+              name="first_name"
+              type="text"
+              title="First Name"
+              class="field-large"
+              id="first-name"
+              required="required"
+              aria-required="true"
+            />
+          </p>
+          <p class="row">
+            <label for="last-name">Last/Family Name:</label>
+            <input
+              type="text"
+              id="last-name"
+              title="Last Name"
+              name="last_name"
+              class="field-large"
+            />
+          </p>
+          <p class="row">
+            <label for="email"><span class="required">*</span>Email:</label>
+            <input
+              name="email"
+              type="email"
+              title="E-mail"
+              class="field-large"
+              required="required"
+              id="email"
+              placeholder="yourname@example.com"
+            />
+          </p>
+          <p class="row">
+            <label for="phone">Phone:</label>
+            <input
+              name="phone"
+              type="tel"
+              title="International Phone Number"
+              class="field-large"
+              id="phone"
+              autocomplete="off"
+              data-intl-tel-input-id="0"
+              placeholder="+1 (650) 555-0123"
+            />
+            <span id="valid-msg" style="display: none">✓ Valid</span>
+            <span id="error-msg" style="display: none; color: Red;"
+              >Invalid Telephone Number</span
+            >
+          </p>
+        </div>
+
+        <hr />
+        <h2 class="hdr-public-profile">Your Social Media Profile (Optional)</h2>
+        <div class="fields">
+          <div class="row">
+            <label for="picture">Picture:</label>
+            <input type="file" id="picture" name="picture" accept="image/*" />
+            <p class="instructions">Maximum size of 700k. JPG, GIF or PNG.</p>
+          </div>
+          <p class="row">
+            <label for="screen-name">Screen Name:</label>
+            <input
+              type="text"
+              id="screen-name"
+              name="screen_name"
+              class="field-medium"
+            />
+          </p>
+          <div class="row">
+            <label for="website">Website URL:</label>
+            <input
+              type="url"
+              id="website"
+              name="website"
+              placeholder="http://www.example.com"
+              class="field-large"
+            />
+            <p class="instructions">
+              Have a homepage or a blog? Put the address here, <br />
+              beginning with
+              <kbd>http://</kbd>
+              or
+              <kbd>https://</kbd>
+              .
+            </p>
+          </div>
+          <div class="row">
+            <fieldset class="radios">
+              <legend>Gender:</legend>
+              <p class="row">
+                <input
+                  type="radio"
+                  id="gender-female"
+                  name="gender"
+                  value="female"
+                />
+                <label for="gender-female">Female</label>
+              </p>
+              <p class="row">
+                <input
+                  type="radio"
+                  id="gender-male"
+                  name="gender"
+                  value="male"
+                />
+                <label for="gender-male">Male</label>
+              </p>
+              <p class="row">
+                <input
+                  type="radio"
+                  id="gender-other"
+                  name="gender"
+                  value="other"
+                />
+                <label for="gender-other">Other</label>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+
+        <hr />
+        <h2 class="hdr-emails">Email Notifications</h2>
+        <div class="fields checkboxes">
+          <div class="row">
+            <input
+              type="checkbox"
+              id="email-ok-msg-from-users"
+              name="email_signup[]"
+              value="user-emails"
+            />
+            <label for="email-ok-msg-from-users"
+              >It is okay to email me with messages from other users.</label
+            >
+          </div>
+          <div class="row">
+            <input
+              name="email_signup[]"
+              type="checkbox"
+              id="email-ok-occasional-updates"
+              value="occasional-updates"
+              checked
+            />
+            <label for="email-ok-occasional-updates"
+              >It is okay to email me with occasional promotions about events
+              and campaigns.</label
+            >
+          </div>
+        </div>
+
+        <br />
+        <hr />
+        <div class="error center" style="display: none">
+          <span></span>
+        </div>
+        <div class="center">
+          <input
+            name="submit"
+            type="submit"
+            id="submit"
+            value="Post Your Planting Report"
+          />
+          <input
+            name="clear"
+            type="reset"
+            id="clear"
+            value="Clear and Restart"
+          />
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

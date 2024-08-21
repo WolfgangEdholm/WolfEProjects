@@ -1,0 +1,45 @@
+body {
+	background-color: #033;
+}
+#calculator-container {
+	border: 6px #066 solid;
+}
+h1, h2, h3 {
+	color: #6CC;
+	font: 27px Futura, "Century Gothic", AppleGothic, sans-serif;
+	padding: 5px;
+}
+#content {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #033;
+}
+input[type=button] {
+	font: 26px Futura, "Century Gothic", AppleGothic, sans-serif;
+	font-size: 200%;
+	cursor: pointer;
+	width: 67px;
+}
+input[type=button]:hover {
+	background-color: #8ED7C8;
+	color: #900;
+}
+input[type=text] {
+	font-family: Futura,"Century Gothic", AppleGothic, sans-serif;
+	font-size: 26px;
+	background-color: #FFC;
+	color: #03C;
+	width: 97%;
+}
+.blackBGwithBorder {
+	background-color: black;
+	border: 6px #066 solid;
+}
+label {
+	background-color: black;
+	color: #6CC;
+	font: 27px Futura, ‘Century Gothic’, AppleGothic, sans-serif;
+	text-align: center;
+	display: block;
+}

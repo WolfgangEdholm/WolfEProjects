@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- test framework css -->
+    <link rel="stylesheet" href="js/test/lib/jasmine-2.1.3/jasmine.css" />
+
+    <!-- test framework javascript -->
+    <script src="js/test/lib/jasmine-2.1.3/jasmine.js"></script>
+    <script src="js/test/lib/jasmine-2.1.3/jasmine-html.js"></script>
+    <script src="js/test/lib/jasmine-2.1.3/boot.js"></script>
+    <script src="js/test/ifelseSetup.js"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>A Basic Calculator (If-Else)</title>
+    <meta name="description" content="A Basic Calculator" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+
+    <!-- source files -->
+    <script defer src="js/vendor/math.js"></script>
+    <!-- DONE: add script tag linking to ifelse.js here -->
+    <script defer src="js/ifelse.js">
+      <!-- test spec files -->
+      <script defer src="js/test/ifelseSpec.js">
+    </script>
+  </head>
+  <body>
+    <!-- Replace "Your Name Goes Here!" with your first and last name, thanks! -->
+    <h1>Wolfgang Edholm, Xinyu Guo</h1>
+
+    <div id="content">
+      <div id="calculator-container">
+        <!-- The name of the form is "calc" -->
+
+        <!-- DO NOT CHANGE THE FORM! Only use external JavaScript files -->
+
+        <form name="calc">
+          <label for="output">A Basic Calculator</label>
+          <!-- the name of the textbox is "output" -->
+          <input id="output" name="output" type="text" readonly /> <br />
+          <input type="button" id="1" value="  1  " />
+          <input type="button" id="2" value="  2  " />
+          <input type="button" id="3" value="  3  " />
+          <input type="button" id="+" value="  +  " /> <br />
+          <input type="button" id="4" value="  4  " />
+          <input type="button" id="5" value="  5  " />
+          <input type="button" id="6" value="  6  " />
+          <input type="button" id="-" value="  -  " /> <br />
+          <input type="button" id="7" value="  7  " />
+          <input type="button" id="8" value="  8  " />
+          <input type="button" id="9" value="  9  " />
+          <input type="button" id="*" value="  x  " /> <br />
+          <input type="button" id="c" value="  C  " />
+          <input type="button" id="0" value="  0  " />
+          <input type="button" id="equate" value="  =  " />
+          <input type="button" id="/" value="&divide;" />
+        </form>
+      </div>
+      <h2>Part 3 If-Else Version</h2>
+    </div>
+  </body>
+</html>
