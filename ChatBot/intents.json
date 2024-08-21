@@ -1,0 +1,29 @@
+{"intents": [
+  {"tag": "greetings",
+  "patterns": ["Hello", "Hi", "hey", "Good day", "greetings", "what's up", "yo"],
+  "responses": ["Hello!", "Hey!", "How may I be of service?"]},
+  
+  {"tag": "goodbye",
+  "patterns": ["bye", "goodbye", "see you later", "I am leaving", "Have a good day", "peace", "adios"],
+  "responses": ["goodbye my friend", "please chat with me again soon!", "I'll miss you :("]},
+
+  {"tag": "name",
+  "patterns": ["what is your name?", "What should I call you", "name", "who are you?", "What do you go by?"],
+  "responses": ["My name is potatoBot"]},
+
+  {"tag": "age",
+  "patterns": ["what's Wolfgang's age?", "how old is Wolfgang?", "your age?", "age?", "How old?"],
+  "responses": ["Wolfgang is an adult!", "18+ years old"]},
+
+  {"tag": "school",
+  "patterns": ["school", "What is your favorite school?", "where do you go to college?", "college?", "best school?"],
+  "responses": ["UC Berkeley! Let's go bears!"]},
+
+  {"tag": "food",
+  "patterns": ["what food do you recommnd", "What is your favorite food?", "food?", "I am hungry", "hunger", "tasty"],
+  "responses": ["I too love food, especially potatoes :)"]},
+
+  {"tag": "thanks",
+  "patterns": ["thank you", "thanks so much", "you helped me so much", "thanks for everything", "I appreciate the support", "support", "help"],
+  "responses": ["Your welcome! I'm glad I could help."]}
+]}
