@@ -1,0 +1,23 @@
+USE go01;
+DROP TABLE IF EXISTS User;
+CREATE TABLE User (
+  id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  firstName VARCHAR(30) NOT NULL,
+  middleName VARCHAR(30) NOT NULL,
+  lastName VARCHAR(30) NOT NULL,
+  suffix VARCHAR(10) NOT NULL,
+  email VARCHAR(30) NOT NULL
+);
+
+INSERT INTO User (
+  firstName,
+  middleName,
+  lastName,
+  suffix,
+  email
+)
+VALUES
+( 'Alan', '', 'Zikorsky', '', 'alan.zikorsky@gmail.com' ),
+( 'Belen', "Kathy", 'York', '', 'belen.york@gmail.com' ),
+( 'Conrad', "Leyland", 'Xavier', "Jr", 'conrad.xavier@gmail.com' ),
+( 'Doris', '', 'Wilson', '', 'doris.wilson@gmail.com' );
