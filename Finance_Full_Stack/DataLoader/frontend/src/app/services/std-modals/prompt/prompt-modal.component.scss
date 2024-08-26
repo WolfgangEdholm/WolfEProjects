@@ -1,0 +1,29 @@
+@import "src/styles";
+
+// .dialog-title {
+//   //background: lightblue;
+//   //padding: 0;
+//   //margin: 0;
+// }
+
+.dialog-content {
+  width: 100%;
+  //background: lightgreen;
+}
+
+.input-field {
+  width: 100%;
+  //background: yellow;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cancel-ok {
+  display: flex;
+  flex-direction: row;  
+}

@@ -1,0 +1,64 @@
+
+
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ modalTitle }}
+  </h4>
+
+    <mat-form-field>
+      <mat-label>Database</mat-label>
+      <mat-select
+        formControlName="dbSelect"
+        panelClass="xpanel"
+        (selectionChange)="databaseSelectionChange($event)"
+      >
+        <mat-option *ngFor="let db of allDbNames" [value]="db">
+          {{ db }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <form [formGroup]="form">
+      <div class="dialog-content">
+
+        <mat-form-field>
+          <mat-label>{{ itemType }}</mat-label>
+          <mat-select
+            formControlName="tableSelect"
+            panelClass="xpanel"
+            (selectionChange)="tableSelectionChange($event)"
+          >
+            <mat-option *ngFor="let db of allTableNames" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </form>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="md2.cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="md2.okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

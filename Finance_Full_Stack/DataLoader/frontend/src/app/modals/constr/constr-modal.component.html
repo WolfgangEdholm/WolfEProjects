@@ -1,0 +1,96 @@
+<div
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div class="dialog">
+    <h1 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ 'Constraint on ' + data.tableName + '.' + data.columnName }}
+    </h1>
+
+    <mat-dialog-content class="dialog-content">
+
+      <form [formGroup]="form">
+
+        <mat-form-field class="operator-select" appearance="fill">
+          <mat-label>Operators</mat-label>
+          <mat-select
+            formControlName="opSelect"
+            panelClass="xpanel"
+            (selectionChange)="opSelectionChange($event)"
+          >
+            <mat-option *ngFor="let op of operators" [value]="op.val">
+              {{ op.view }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Specified Value(s)</mat-label>
+          <textarea matInput
+            #textarea
+            formControlName="values"
+            placeholder="Put values here"
+          >
+          </textarea>
+        </mat-form-field>
+
+        <ng-container *ngIf="isMultiple; else elseNotMultiple">
+          <mat-form-field class="value-select" appearance="fill">
+            <mat-label>Values</mat-label>
+            <mat-select
+              formControlName="manyValuesSelect"
+              multiple
+              panelClass="xpanel"
+              (selectionChange)="valueSelectionChange($event)"
+              (openedChange)="openedChange($event)"
+            >
+            <mat-option *ngFor="let val of allValues" [value]="val">
+              {{ val }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+
+        <ng-template #elseNotMultiple>
+          <mat-form-field class="value-select" appearance="fill">
+            <mat-label>Values</mat-label>
+            <mat-select
+              formControlName="oneValueSelect"
+              panelClass="xpanel"
+              (selectionChange)="valueSelectionChange($event)"
+            >
+            <mat-option *ngFor="let val of allValues" [value]="val">
+              {{ val }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-template>
+
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <div class="dialog-delete">
+          <button mat-button (click)="deleteClick($event)">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

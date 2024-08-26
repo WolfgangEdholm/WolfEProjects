@@ -1,0 +1,198 @@
+<!-- 
+<app-loading-spinner *ngIf="dbEng.isLoading"></app-loading-spinner>
+  [ngStyle]="!dbEng.isLoading ? {} : { 'display' : 'none' }">
+
+  *ngIf="!dbEng.isLoading"
+  *ngIf="lpBottomIx > -1 && lpTopIx > -1"
+
+  class="xcard-col-bg"
+  style="background:lightblue"
+-->
+
+<section
+  class="xsection"
+>
+  <div
+    class="data-wrapper"
+    *ngIf="g.queryPaneIx > -1 && g.filterPaneIx > -1 && g.transPaneIx > -1"
+  >
+    <!-- left column -->
+    <div
+      *ngIf="showLeftColumn"  
+      class="xcard-col-bg"
+      [fxFlex]="leftColumnSize + '%'"
+    >
+      <app-side-panel
+        column="left"
+
+        topTitle="Queries"
+        topIconName="policy"
+        [topIconColor]="tc.qColor"
+        [topIx]="pd.sidePanelIx(g.queryPaneIx)"
+        [topDropCallback]="pd.queryDragReleased"
+        [topItemHeight]="2.5"
+
+        bottomTitle="Filters"
+        bottomIconName="build"
+        [bottomIconColor]="tc.fColor"
+        [bottomIx]="pd.sidePanelIx(g.filterPaneIx)"
+        [bottomDropCallback]="pd.filterDragReleased"
+        [bottomItemHeight]="2.5"
+        bottomStartPosition="bottom"
+      >
+      </app-side-panel>
+      
+    </div>
+
+    <!-- center column -->
+    <div
+      class="xcard-col-bg"
+      [fxFlex]="centerColumnSize + '%'"
+    >
+      <mat-card
+        [className]="css.xcardBgClasses('xcard-col-' + centerAlighment())"   
+        [ngStyle]="css.xcardBgStyles()"
+      >
+        <!-- 
+          #transTarget="cdkDropList"
+        -->
+        <div
+          [className]="css.xShadowOrBorder('positions-card')"
+          cdkDropList
+
+          #scrollWrapper
+          cdkDropListConnectedTo="targetSource"
+        >
+          <canvas
+            class="table-canvas"
+            #xcanvas
+            (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseup)="onMouseUp($event)"
+            (dblclick)="onDblClick($event)"
+          ></canvas>
+        </div>
+
+        <mat-card-actions class="xform-action-bg">
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            (click)="showHideLeftPanel()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >{{ showLeftColumn ? 'chevron_left' : 'chevron_right' }}
+            </mat-icon>
+            <span><br>{{ showLeftColumn ? tlMsg2 : tlMsg1 }}</span>
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            color="warn"
+            (click)="onRemove()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >delete
+            </mat-icon>
+            <span><br>Remove</span>
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            color="warn"
+            (click)="onEdit()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >edit
+            </mat-icon>
+            <span><br>Edit</span>
+          </button>
+
+          <button
+            mat-button
+            class="xbutton"
+            (click)="onSave($event)"  
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >save
+            </mat-icon>
+            <span><br>Save</span>
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            (click)="onRun()"  
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >system_update_alt
+            </mat-icon>
+            <span><br>Run</span>
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            (click)="showHideRightPanel()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >{{ showRightColumn ? 'chevron_right' : 'chevron_left' }}
+            </mat-icon>
+          <span><br>{{ showRightColumn ? tlMsg2 : tlMsg1 }}</span>
+        </button>
+
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+
+    <!-- right column -->
+    <div
+      *ngIf="showRightColumn"
+      class="xcard-col-bg"
+      [fxFlex]="rightColumnSize + '%'"
+    >
+      <app-side-panel
+        column="right"
+        topTitle="Transformers"
+        topIconName="account_tree"
+        [topIconColor]="tc.tColor"
+        [topIx]="pd.sidePanelIx(g.transPaneIx)"
+        [topDropCallback]="pd.transDragReleased"
+        [topItemHeight]="2.5"
+
+        bottomTitle="Helpers"
+        bottomIconName="help"
+        [bottomIconColor]="tc.hColor"
+        [bottomIx]="pd.sidePanelIx(g.helperPaneIx)"
+        [bottomDropCallback]="pd.helperDragReleased"
+        [bottomItemHeight]="2.5"
+        bottomStartPosition="bottom"
+      >
+      </app-side-panel>
+    </div>
+
+  </div>
+</section>
+
+
+

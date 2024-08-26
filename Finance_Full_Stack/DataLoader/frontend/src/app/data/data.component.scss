@@ -1,0 +1,255 @@
+@import "../../styles";
+
+.page-wrapper {
+  width: 100%;
+  height: calc(100vh - 4.0rem);
+  //background: green;
+}
+
+.table-wrapper {
+  width: 100%;
+}
+
+.table-title-row {
+  box-sizing: border-box;
+  width: 100%;
+  //box-sizing: content-box;
+  //width: calc(94% - 2px);
+  //border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0 3%;
+  cursor: default;
+}
+
+// .table-title-date {
+//   margin: 0;
+//   margin-top: .6rem;
+//   width: 30%;
+//   overflow: hide;
+//   font-weight: 400;
+//   //background: lightblue;
+// }
+
+.table-title-view-controller {
+  // margin: 0;
+  // padding: 0;
+  width: 30%;
+  height: 1.8rem;
+  display: flex;
+  //flex-direction: row;
+  //justify-content: flex-start;
+  //overflow: hide;
+  //background: lightgreen;
+}
+
+.table-title-toggle-view {
+  // margin: 0;
+  // padding: 0;
+  // width: 30%;
+  // height: 1.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hide;
+  //background: lightgreen;
+}
+
+.table-title-title {
+  width: 40%;
+  height: 1.8rem;
+  display: flex;
+  flex-direction: row;
+  overflow: hide;
+  justify-content: center;
+  //font-weight: 400;
+  //background: lightblue;
+}
+
+.table-title-title-button {
+  margin-top: -.4rem;
+  min-width: 2rem;
+  width: 2rem;
+  padding-left: .3rem;
+  //background: lightgreen;
+}
+
+.table-title-title-text {
+  margin-top:.25rem;
+  font-weight: 500;
+  //background: lightblue;
+}
+
+.table-title-add-column {
+  // margin: 0;
+  // padding: 0;
+  width: 30%;
+  height: 1.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  overflow: hide;
+  //background: lightgreen;
+}
+
+.table-title-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  //width: 140px;
+}
+
+.add-column-text {
+  margin-top: -.2rem;
+  margin-left: .6rem;
+  margin-right: 1rem;
+}
+
+.add-column-icon {
+  //margin-top: .3rem;
+  margin-top: -.3rem;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.help-row {
+  margin-left: 1.5rem;
+  color: red;
+  //background: yellow;
+}
+
+// .query-height1 {
+//   height: calc(100vh - 6.826rem);
+// }
+// .query-height2 {
+//   height: calc(100vh - 8.01rem);
+// }
+
+.query-height1 {
+  height: calc(100vh - 14.826rem);
+}
+.query-height2 {
+  height: calc(100vh - 16.01rem);
+}
+
+.query {
+  width: 100vw;
+  //height: calc(100vh - 6.826rem);
+  //height: calc(100vh - 8.01rem);
+  //height: 800px;
+  // height: 60vh;
+  // max-height: 60vh;
+  // min-height: 60vh;
+
+  overflow: auto;
+  margin: 0;
+}
+
+.mat-table {
+  mat-row, mat-header-row, mat-footer-row {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  mat-cell:first-child, mat-footer-cell:first-child, mat-header-cell:first-child {
+    padding-left: 0;
+  }
+
+  mat-cell:last-child, mat-footer-cell:last-child, mat-header-cell:last-child {
+    padding-right: 0;
+  }
+}
+
+.header-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;  
+}
+
+.header-error {
+  @extend .header-cell;
+  color: red;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  //opacity: 0;
+  background: lightgray;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.header-cell .cdk-drop-list-dragging:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Table Cell Classes
+
+$group-color-value: #f8fafa;
+
+.error-color {
+  color: red;
+}
+
+.warning-color {
+  color: darkorange;
+}
+
+.group-color {
+  background: $group-color-value;
+}
+
+.row-num {
+  max-width: 3rem;
+  background: $group-color-value;
+  justify-content: center;
+  //background: lightgray;
+}
+
+.group-by {
+  max-width: 3.5rem;
+  background: $group-color-value;
+  //background: yellowgreen;
+}
+
+.group-by-end {
+  max-width: 1.3rem;
+  background: $group-color-value;
+  //background: yellowgreen;
+}
+
+.left-class {
+  padding-left: 1rem;
+  //text-align: left;
+  justify-content: flex-start;
+}
+
+.center-class {
+  //text-align: center;
+  justify-content: center;
+}
+
+.right-class {
+  padding-right: 1rem;
+  //text-align: right;
+  justify-content: flex-end;
+}
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  //justify-content: flex-end;
+  justify-content: center;
+}

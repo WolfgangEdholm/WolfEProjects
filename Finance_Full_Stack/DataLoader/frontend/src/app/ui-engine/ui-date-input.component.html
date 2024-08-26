@@ -1,0 +1,33 @@
+<div
+  [className]="css.xformFieldFrameClass()"
+  [ngStyle]="css.xformFieldFrameStyles()"
+>
+  <mat-form-field
+    [formGroup]="uie.forms[0]"
+    appearance="fill"
+    class="xform-field">
+    <mat-label>{{ title }}</mat-label>
+    <!-- 
+    <input
+      matInput
+      [formControlName]="fieldName"
+      [(value)]="currentValue"
+      [matDatepicker]="picker"
+      (dateChange)="onDateChange($event)"
+    >      
+    -->
+    <input
+      matInput
+      [formControlName]="fieldName"
+      [matDatepicker]="picker"
+      (dateChange)="onDateChange($event)"
+    >
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="picker"
+    >
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="hasError()">{{ uie.errorMessage }}</mat-error>
+  </mat-form-field>
+</div>

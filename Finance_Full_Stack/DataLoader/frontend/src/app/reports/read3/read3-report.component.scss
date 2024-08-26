@@ -1,0 +1,70 @@
+@import "../../../styles";
+
+.top-of-table {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0rem 1.5rem;
+}
+
+.table-title {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.filter-field {
+  background: transparent;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+.table {
+  width: 100%;
+  overflow: auto;
+}
+
+.scroll-wrapper {
+  max-height: calc(100vh - 172px - #{$toolbar-height});
+  overflow: auto;
+}
+
+.cellError {
+  color: red;
+}
+
+// .cellOk {
+//   // color: black;
+//   // background: white;
+// }
+
+// .error {
+//   color: white;
+//   background: red;
+// }
+
+.header-center {
+  // direction: rtl;
+  padding-top: 22px;
+  padding-bottom: 22px;
+
+  display: flex;
+  // text-align: right;
+  justify-content: center;
+  // background: yellow;
+  // text-align: center;
+}
+
+.header-right {
+  direction: rtl;
+  padding-top: 22px;
+  padding-bottom: 22px;
+
+  display: flex;
+  // text-align: right;
+  // justify-content: center;
+  // background: yellow;
+  // text-align: center;
+}

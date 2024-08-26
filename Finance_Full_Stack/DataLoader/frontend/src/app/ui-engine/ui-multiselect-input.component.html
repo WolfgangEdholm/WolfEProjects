@@ -1,0 +1,24 @@
+<div
+  [className]="css.xformFieldFrameClass()"
+  [ngStyle]="css.xformFieldFrameStyles()"
+>
+  <mat-form-field
+    [formGroup]="uie.forms[0]"
+    appearance="fill"
+    class="xform-field">
+    <mat-label>{{ title }}</mat-label>
+    <mat-select
+      multiple
+      [formControlName]="fieldName"
+      [(value)]="currentlySelected">
+      <mat-option
+        *ngFor="let item of selectList"
+        [value]="item"
+        (onSelectionChange)="onChangeSelection(item, $event)"
+      >
+        {{ item }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasError()">{{ uie.errorMessage }}</mat-error>
+  </mat-form-field>
+</div>

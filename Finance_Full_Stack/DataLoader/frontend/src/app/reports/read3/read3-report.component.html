@@ -1,0 +1,168 @@
+<section class="xsection">
+
+  <div fxFlex="100%" class="xcard-col-bg">
+    <mat-card
+      [className]="css.xcardBgClasses('xcard-col-center')"
+      [ngStyle]="css.xcardBgStyles()"
+    >
+      <div class="top-of-table">
+        <mat-card-title
+          class="table-title"
+        >Data Sources Integrity Report
+        </mat-card-title>
+
+        <mat-form-field
+          class="filter-field"
+          fxFlex="40%">
+          <input
+            matInput
+            type="text"
+            (keyup)="doFilter($event)"
+            placeholder="Filter"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <!-- 
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="error"></tr>
+
+        -->
+        <table
+          mat-table
+          class="table"
+          [dataSource]="dataSource"
+          matSort
+          matSortStart="asc"
+          (matSortChange)="customSort($event)"      
+        >
+          <ng-container matColumnDef="#"> 
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            > #
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let item; let i = index;"
+              [ngClass]="indexStyle(i, item)"
+            > {{ !this.paginator ? 0 : (this.paginator.pageIndex === 0 ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ici.dbTblColSource">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            > Source Field
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let item"
+              [ngClass]="cellStyle(item)"
+            > {{ item.ici.dbTblColSource }}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="ici.dbQueryName">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="header-right"
+            > Read By </th>
+            <td
+              mat-cell
+              *matCellDef="let item"
+              [ngClass]="cellStyle(item)"
+            > {{ item.ici.dbQueryName }}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="ici.requestColumn">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            > Query Column
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let item"
+              [ngClass]="cellStyle(item)"
+            > {{ item.ici.requestColumn }}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="ici.type">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            > Type
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let item"
+              [ngClass]="cellStyle(item)"
+            > {{ item.ici.type }}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="changeTimeString">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            > Last Source Change
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let item"
+              [ngClass]="cellStyle(item)"
+            > {{ item.changeTimeString }}
+            </td>
+            <!-- 
+              database format and UTC value
+              {{ item.ici.changeDate }} </td>
+              US format and UTC value                    
+              {{ item.changeTimeString }} </td>
+            -->
+          </ng-container>
+
+          <ng-container matColumnDef="changeFixedTimeString">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            > Last Query Adjustment
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let item"
+              [ngClass]="cellStyle(item)"
+            > {{ item.changeFixedTimeString }}
+            </td>        
+            <!-- 
+              database format and UTC value
+              {{ item.ici.changeFixedDate }} </td>
+              US format and UTC value
+              {{ item.changeFixedTimeString }} </td>
+            -->
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>    
+        </table>
+        <mat-paginator [pageSize]="1000" [pageSizeOptions]="[20, 40, 100, 1000]">
+        </mat-paginator>
+
+      </div>
+
+    </mat-card>
+  </div>
+</section>

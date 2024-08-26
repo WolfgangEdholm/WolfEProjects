@@ -1,0 +1,132 @@
+@import "../../styles";
+
+// Hides the form if no data is available or is the form is not set up
+.data-wrapper {
+  width: 100%;
+  height: 100%;
+  background:blue;
+}
+
+// Start left side
+
+.lightlightgrayBg {
+  background: #ededed;;
+}
+
+.indent-wrapper {
+  width: 100%;
+  margin-left: -1rem;
+  padding: 0;
+}
+
+.scroll-wrapper {
+  //box-sizing: border-box;
+  //box-sizing: content-box;
+  max-height: calc(100vh - 106px - #{$toolbar-height});
+  overflow: auto;
+}
+
+$left-column-width: 100%;
+$left-column-item-width: calc(#{$left-column-width});
+$left-column-item-indented-width: calc(#{$left-column-item-width} - 1.5rem);
+
+.left-item-indented {
+  width: $left-column-item-indented-width;
+}
+.left-item {
+  width: $left-column-item-width;
+}
+
+.master-name {
+  margin-left: 1rem;
+  align-self: center;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.master-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.master-name {
+  width: calc(100% - 2.5rem);
+  //text-decoration: underline;
+}
+
+.master-button {
+  margin-top: -.2rem;
+  border-radius: $std-radius;
+}
+
+.master-button-icon {
+  font-size: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.detail-name {
+  margin-left: 1rem;
+  font-size: .9rem;
+  overflow: hidden;
+}
+
+// End left side
+
+// Start right side
+.xcard-col-right, .xcard-col-center {
+  padding-top: calc(0rem - 3px);
+}
+
+.positions-card {
+  // box-sizing: border-box;
+  // border: 1px solid red;
+  height: calc(100% - 0rem);
+
+  // margin: .5rem .5rem;
+  // width: calc(100% - 1rem);
+  margin: 0rem 0rem;
+  width: calc(100% - 0rem);
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.table-canvas {
+  //width: calc(100% - 0px);
+  //height: calc(100% - 0px);
+  //margin: 1px;
+  // box-sizing: border-box;
+  // border: 1px solid blue;
+  background: transparent; // to avoid editor warning
+  //background: yellow;
+}
+
+.create-segment-menu-item {
+  font-size: 2.1rem;
+}
+
+
+// Drag animations support -- generic
+
+.cdk-drag-animating {
+  transition: none;
+}
+
+// .cdk-drag-animating {
+//   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+// }
+
+// /* Animate an item that has been dropped. */
+// .cdk-drag-animating {
+//   transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+// }
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+#position-pool.cdk-drop-list-dragging .position-container:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// End right side

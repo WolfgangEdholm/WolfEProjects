@@ -1,0 +1,19 @@
+<section
+    fxLayout="column"
+    fxLayoutAlign="center center">
+  <h1 mat-dialog-title>Error {{ data.errorCode }}: {{ data.errorTitle }}</h1>
+  <mat-dialog-content>
+    <div *ngFor="let message of data.errorMessages">
+      <p>{{ message }}</p>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="closeModal($event)"
+    >
+      OK
+    </button>
+  </mat-dialog-actions>
+</section>

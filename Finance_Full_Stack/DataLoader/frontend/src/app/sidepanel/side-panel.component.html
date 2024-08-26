@@ -1,0 +1,272 @@
+
+<div
+  class="data-wrapper"
+>
+  <!-- left column -->
+  <div
+    *ngIf="showLeftColumn"   
+    cdkDropList
+    #transSource="cdkDropList"
+    [cdkDropListConnectedTo]="dropList"
+    class="xcard-col-bg"
+  >
+    <mat-card
+      [className]="css.xcardBgClasses('xcard-col-' +
+        column + '-scroll xcard-left-list')"
+      [ngStyle]="css.xcardBgStyles()"
+    >
+      <div
+        class="sp-top-wrapper"
+        [class.sp-small-top-wrapper]="spExpandedCode === 1"
+      >
+        <mat-card-title
+          [ngStyle]="css.xcardTitleStyles()"
+        >
+        <div class="sp-title-wrapper">
+          <mat-icon
+            class="sp-title-icon"
+            [ngStyle]="{ 'color': topIconColor }"
+            inline=true
+            (click)="onTopIconClick()"
+          >
+            {{ topIconName }}
+          </mat-icon>
+          <p class="sp-title-text">
+            {{ topTitle }}
+          </p>
+        </div>
+
+        </mat-card-title>
+        <div
+          class="sp-top-container"
+          [class.sp-small-top-container]="spExpandedCode === 1"
+        >
+          <div *ngIf="topIx > -1 && sps.panes[topIx].items.length > 0">
+            <div
+              *ngFor="let item of sps.panes[topIx].items; let ix = index"
+              class="indent-wrapper"
+              [style.marginLeft.rem]="!item.isTopLevel ? 1.5 : 0"
+              [ngClass]="!item.isTopLevel ? 'left-item-indented' : 'left-item'"
+              (click)="selectTopItem(item.displayIx)"
+            >
+              <div *ngIf="item.isTopLevel; else spOtherTop">
+                <div
+                  cdkDrag
+                  [cdkDragDisabled]="!topDrag ? null : true"
+                  (cdkDragEntered)="onTopDragEntered($event)"
+                  (cdkDragExited)="onTopDragExited($event)"
+                  (cdkDragReleased)="onTopDragReleased($event)"
+                  [cdkDragData]="item"
+
+                  [className]="css.xlistItemFrameClass()"
+                  [ngStyle]="css.xlistItemThinFrameStyles()"
+                  [style.background]="topSelectCode(item) > 0
+                    ? 'lightgray' : ''"
+                >
+                  <div
+                    [className]="css.xlistItemClass()"
+                  >
+                    <div
+                      class="parent-container"
+                      [style.height.rem]="topItemHeight > 0
+                        ? topItemHeight : ''"
+                    >
+                      <div
+                        class="sp-std-name parent-name"
+                        [ngClass]="checkTopHighlight(item)"
+                      >
+                        {{ item.displayName }}
+                      </div>
+                      <div
+                        *ngIf="item.hasChildren"
+                      >
+                        <button
+                          mat-icon-button
+                          aria-label="Toggle Open State"
+                          class="parent-button"
+                          (click)="topItemOpenToggle(item.displayIx)"
+                        >
+                          <mat-icon
+                            inline=true
+                            class="parent-button-icon">
+                            {{ item.isOpen ? 'expand_less' : "expand_more" }}
+                          </mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ng-template #spOtherTop>
+                <div
+                  [className]="css.xlistItemFrameClass()"
+                  [ngStyle]="css.xlistItemThinFrameStyles()"
+                  [style.background]="topSelectCode(item) === 1
+                    ? '#ededed'
+                    : (topSelectCode(item) === 2
+                      ? 'lightgray'
+                      : '')"
+                >
+                  <div
+                    [className]="css.xlistItemClass()"
+                  >
+                    <div
+                      class="parent-container"
+                      [style.height.rem]="topChildItemHeight > 0
+                        ? topChildItemHeight : ''"
+                    >
+                      <!-- ngClass and className below so they don't 'step on each other'-->
+                      <div
+                        [ngClass]="topChildItemHeight > 0
+                          ? 'sp-std-name tall-child-name' : 'child-name'"
+                        [className]="checkTopChildHighlight(item)"
+                      >            
+                        {{ item.displayName }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="bottomIx > -1"
+        class="sp-bottom-wrapper"
+        [class.sp-small-bottom-wrapper]="spExpandedCode === 2"
+      >
+        <div class="sp-bottom-header">
+          <mat-card-title
+            [ngStyle]="css.xcardTitleStyles()"
+          >
+            <div class="sp-title-wrapper">
+              <mat-icon
+                class="sp-title-icon"
+                [ngStyle]="{ 'color': bottomIconColor }"
+                inline=true
+                (click)="onBottomIconClick()"
+              >
+                {{ bottomIconName }}
+              </mat-icon>
+              <p class="sp-title-text">
+                {{ bottomTitle }}
+              </p>
+            </div>
+
+          </mat-card-title>
+          <button
+            mat-icon-button
+            aria-label="Expand Button"
+            class="expand-button"
+            (click)="toggleExpanded()"
+          >
+            <mat-icon
+              inline=true
+              class="expand-button-icon"
+            >
+              {{ spExpandedCode === 0 ? "expand_less" :
+                  spExpandedCode === 1 ? "expand_more" : "remove" }}
+            </mat-icon>
+          </button>
+        </div>
+        <div
+          class="sp-bottom-container"
+          [class.sp-small-bottom-container]="spExpandedCode === 2"
+        >
+          <div *ngIf="bottomIx > -1 && sps.panes[bottomIx].items.length > 0">
+            <div
+              *ngFor="let item of sps.panes[bottomIx].items"
+              class="indent-wrapper"
+              [style.marginLeft.rem]="!item.isTopLevel ? 1.5 : 0"
+              (click)="selectBottomItem(item.displayIx)"
+            >
+              <div
+                *ngIf="item.isTopLevel; else spOtherBottom"
+              >
+                <div
+                  cdkDrag
+                  [cdkDragDisabled]="!bottomDrag ? null : true"
+                  (cdkDragEntered)="onBottomDragEntered($event)"
+                  (cdkDragExited)="onBottomDragExited($event)"
+                  (cdkDragReleased)="onBottomDragReleased($event)"
+                  [cdkDragData]="item"
+
+                  [className]="css.xlistItemFrameClass()"
+                  [ngStyle]="css.xlistItemThinFrameStyles()"
+                  [style.background]="bottomSelectCode(item) > 0
+                    ? 'lightgray' : ''"
+                >
+                  <div
+                    [className]="css.xlistItemClass()"
+                  >
+                    <div
+                      class="parent-container"
+                      [style.height.rem]="bottomItemHeight > 0
+                        ? bottomItemHeight : ''"
+                    >
+                      <div
+                        class="sp-std-name parent-name"
+                        [ngClass]="checkBottomHighlight(item)"
+                      >
+                        {{ item.displayName }}
+                      </div>
+                      <div
+                        *ngIf="item.hasChildren"
+                      >
+                        <button
+                          mat-icon-button
+                          aria-label="Toggle Parent"
+                          class="parent-button"
+                          (click)="bottomItemOpenToggle(item.displayIx)"
+                        >
+                          <mat-icon
+                            inline=true
+                            class="parent-button-icon"
+                          >
+                            {{ item.isOpen ? 'expand_less' : "expand_more" }}
+                          </mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ng-template #spOtherBottom>
+                <div
+                  [className]="css.xlistItemFrameClass()"
+                  [ngStyle]="css.xlistItemThinFrameStyles()"            
+                  [style.background]="item.itemIx === bottomSelectedItemIx
+                    ? 'ededed' : ''"
+                >
+                  <div
+                    [className]="css.xlistItemClass()"
+                >
+                  <div
+                    class="parent-container"
+                    [style.height.rem]="bottomChildItemHeight > 0
+                      ? bottomChildItemHeight : ''"
+                  >
+                    <!-- ngClass and className below so they don't 'step on each other'-->
+                    <div
+                      [ngClass]="bottomChildItemHeight > 0
+                        ? 'sp-std-name tall-child-name' : 'child-name'"
+                      [className]="checkBottomChildHighlight(item)"
+                    >
+                      {{ item.displayName }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+
+
+

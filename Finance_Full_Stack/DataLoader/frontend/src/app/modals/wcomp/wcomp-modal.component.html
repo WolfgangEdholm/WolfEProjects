@@ -1,0 +1,182 @@
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >
+      {{ 'Computed: ' + data.name }}
+    </h4>
+
+    <mat-dialog-content class="dialog-content">
+
+      <form [formGroup]="form">
+
+        <div class="input-area">
+          <mat-form-field class="input-field">
+            <mat-label>Name</mat-label>
+            <input matInput
+              formControlName="name"
+            >
+            <p class="error-message" *ngIf="nameError">{{ nameError }}</p>
+          </mat-form-field>
+  
+          <mat-form-field class="input-field-code">
+            <mat-label>Code</mat-label>
+            <textarea matInput
+              class="code-ta"
+              #textarea
+              formControlName="code"
+              placeholder="Write code here"
+            >
+            </textarea>
+            <p class="error-message" *ngIf="codeError">{{ codeError }}</p>
+          </mat-form-field>
+        </div>
+
+        <div class="control-row">
+          <div>
+            <mat-form-field class="function-select">
+              <mat-label>Functions</mat-label>
+              <mat-select
+                formControlName="funcSelect"
+                panelClass="xpanel"
+                (selectionChange)="funcSelectionChange($event)"
+              >
+                <mat-option *ngFor="let func of functions" [value]="func.val">
+                  {{ func.view }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field class="operator-select">
+              <mat-label>Operators</mat-label>
+              <mat-select
+                formControlName="opSelect"
+                panelClass="xpanel"
+                (selectionChange)="opSelectionChange($event)"
+              >
+                <mat-option *ngFor="let op of operators" [value]="op.val">
+                  {{ op.view }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field class="column-select">
+              <mat-label>Columns</mat-label>
+              <mat-select
+                formControlName="colSelect"
+                panelClass="xpanel"
+                (selectionChange)="colSelectionChange($event)"
+              >
+                <mat-option *ngFor="let col of columns" [value]="col">
+                  {{ col }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- 
+            <mat-form-field class="justification-select" appearance="fill">        
+        -->
+
+
+        <div class="control-row">
+
+          <div>
+            <mat-form-field class="justification-select">
+              <mat-label>Justification</mat-label>
+              <mat-select
+                formControlName="justSelect"
+                panelClass="xpanel"
+                (selectionChange)="justSelectionChange($event)"
+              >
+                <mat-option *ngFor="let just of justifications" [value]="just.val">
+                  {{ just.view }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div class="test-group">
+            <p class="value-check">{{ result }}</p>
+            <button
+              mat-stroked-button
+              class="test-button"
+              (click)="test()"
+            >
+              Compile and test for row 1
+            </button>
+          </div>
+        </div>
+
+        <div class="control-row">
+
+          <div>
+            <mat-form-field class="db-type-select">
+              <mat-label>Database Datatype</mat-label>
+              <mat-select
+                formControlName="dbTypeSelect"
+                panelClass="xpanel"
+                (selectionChange)="dbTypeSelectionChange($event)"
+              >
+                <mat-option *ngFor="let dbTp of dbTypes" [value]="dbTp">
+                  {{ dbTp }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-checkbox
+              formControlName="groupByCompatible"
+              class="groupby-compatible"
+            >
+              GroupBy compatible
+            </mat-checkbox>
+
+          </div>
+          
+          <div>
+            <mat-checkbox
+              formControlName="downstramChange"
+              class="downstream-change"
+            >
+              Downstream change required
+            </mat-checkbox>
+          </div>
+
+        </div>
+
+      </form>
+    </mat-dialog-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <div *ngIf="data.ix > -1">
+          <div class="dialog-delete">
+            <button mat-button (click)="deleteClick($event)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

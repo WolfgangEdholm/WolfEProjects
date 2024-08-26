@@ -1,0 +1,487 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  margin: 0;
+  height: 100%; 
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$breakpoint-tablet: 1200px;
+
+$is-mobile: false;
+@media only screen and (max-width: $breakpoint-tablet) {
+  $is-mobile: true;
+}
+// for now
+$is-mobile: false;
+
+$toolbar-height: if($is-mobile, 5vh, 64px);
+$content-height: calc(100vh - #{$toolbar-height});
+
+$card-marg-std: 1rem;
+$card-marg-bottom: 1.5rem;
+$card-padding-top: .4rem;
+$card-padding-right: .6rem;
+// adjustment when using style flat with border.
+// the border adds to the left margin and subtracts from the right
+$card-padding-left: calc(.6rem - 3px);
+// Allow child to have margin/padding to make room for scroller
+$card-padding-right-scroll: 0rem;
+$card-padding-bottom: 0rem;
+
+$item-std-marg: .6rem;
+
+$menu-icon-font-size: if($is-mobile, $toolbar-height / 1.8, 1.5rem);
+
+// $aaGradient: linear-gradient(to right, #f7690a, #ff5927);
+// $aaGradient2: linear-gradient(to right, #f7690a, #f8690a);
+
+//$appColor: teal;
+$appColor: #0faaaa;
+//$appColor: #03dac5;
+
+$aaColor: #ff5927;
+$iconGray: #888888;
+
+$offWhite: #f4f4f4;
+$offoffWhite: #d9d9d9;
+$gray: #6d6d6d;
+$lightGray: #9c9c9c;
+$lightLightGray: #b1b1b1;
+
+$std-radius: .3rem;
+
+@mixin std-shadow {
+  box-shadow: 0 4px 8px 0 rgba(#000000, 0.2);
+}
+@mixin hover-shadow {
+  box-shadow: 0 8px 16px 0 rgba(#000000, 0.2);   
+}
+
+.xsection {
+  //height: calc(#{$content-height} - 2px);
+  height: calc(#{$content-height});
+  //background: lightgreen;
+  display: flex;
+  flex-direction: row;
+  // fxLayoutAlign="center center" equivalent css"
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: 1.1rem;
+}
+
+.xcard-col-bg {
+  // Borders and border-box sizing seem to fix display errors on chrome
+  box-sizing: border-box;
+  border: 1px solid white;
+  //border: 1px solid lightpink;
+  height: 100%;
+  background: white;
+  //background: lightpink;
+}
+
+// for mat-card
+.xcard-col {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - #{$card-padding-top} - #{$card-padding-bottom} -
+    #{$card-marg-std} - #{$card-marg-bottom});
+  margin-top: $card-marg-std;
+  margin-bottom: $card-marg-bottom;
+  padding-top: $card-padding-top;
+  padding-right: $card-padding-right;
+  padding-bottom: $card-padding-bottom;
+  padding-left: $card-padding-left;
+}
+.xcard-col-left {
+  @extend .xcard-col;
+  margin-left: $card-marg-std;
+  margin-right: calc(#{$card-marg-std} / 2);
+}
+.xcard-col-center {
+  @extend .xcard-col;
+  margin-left: calc(#{$card-marg-std} / 2);
+  margin-right: calc(#{$card-marg-std} / 2);
+}
+.xcard-col-right {
+  @extend .xcard-col;
+  margin-left: calc(#{$card-marg-std} / 2);
+  margin-right: $card-marg-std;
+}
+.xcard-col-full {
+  @extend .xcard-col;
+  margin-left: calc(#{$card-marg-std});
+  margin-right: calc(#{$card-marg-std});
+}
+.xcard-col-left-scroll {
+  @extend .xcard-col-left;
+  padding-right: $card-padding-right-scroll;
+}
+.xcard-col-center-scroll {
+  @extend .xcard-col-center;
+  padding-right: $card-padding-right-scroll;
+}
+.xcard-col-right-scroll {
+  @extend .xcard-col-right;
+  padding-right: $card-padding-right-scroll;
+}
+
+
+.xcard-list {
+  padding-left: 0rem;
+}
+
+.xcard-left-list {
+  padding-left: 0rem;
+  justify-content: space-between;
+}
+
+.xcard-shadow {
+  border-radius: $std-radius;  
+  @include std-shadow;
+  &:hover {
+    @include hover-shadow;
+  }
+}
+
+.xcard-border {
+  border-radius: $std-radius;
+  border: 2px solid lightgray;
+}
+
+.xcard-underline {
+  border-bottom: 2px solid lightgray;
+}
+
+// Standard Form Look
+
+// for mat-card-content
+.xform {
+  flex-grow: 1;
+  overflow: auto;
+  width:100%;
+//background: yellow;
+}
+
+.xform-row {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+// for mat-card-actions
+.xform-action-bg {
+  box-sizing: border-box;
+  width:100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+//background: lightcyan;
+}
+
+.xform-field-frame {
+  background: white;
+  @include std-shadow;
+}
+.xform-field-flat-frame {
+  background: white;
+}
+
+.xform-field-frame:hover {
+  @include hover-shadow;
+}
+.xform-field-flat-frame:hover {
+  background: #fcfcfc;
+}
+
+.xform-field {
+  margin-top: 0rem;
+  width: 100%;
+  //background:lightblue;
+}
+
+.xform-field-thin-frame {
+  //background: lightpink;
+  @include std-shadow;
+}
+.xform-field-thin-flat-frame {
+  background: transparent;
+}
+
+.xform-field-thin-frame:hover {
+  @include hover-shadow;
+}
+.xform-field-thin-flat-frame:hover {
+  background: #fcfcfc;
+}
+
+.xform-field-thin {
+  width: 100%;
+  border: 1px solid black;
+}
+
+// Standard List Look
+
+.xlist-item-frame {
+  margin: 2rem;
+  background: white;
+  @include std-shadow;
+}
+.xlist-item-flat-frame {
+  background: white;
+}
+.xlist-item-frame:hover {
+  @include hover-shadow;
+}
+.xlist-item-flat-frame:hover {
+  //background: #fcfcfc;
+  background: $offWhite;
+}
+
+.xlist-item-thin-frame {
+  margin: 2rem;
+  background: white;
+  @include std-shadow;
+}
+.xlist-item-thin-flat-frame {
+  background: white;
+}
+.xlist-item-thin-frame:hover {
+  @include hover-shadow;
+}
+.xlist-item-thin-flat-frame:hover {
+  //background: #fcfcfc;
+  background: $offWhite;
+}
+
+.xlist-item {
+  width: 100%;
+  // margin-top: 1.0rem;
+  // margin-bottom: .9rem;
+  // margin-top: .0rem;
+  // margin-bottom: .0rem;
+  //background: lightgreen;
+}
+.xlist-item-flat {
+  width: 100%;
+  // padding-top: .6rem;
+  // padding-bottom: .6rem;
+  //background: lightgreen;
+}
+
+// Standard Button Look
+
+.xbutton {
+  color: $iconGray;
+  width: 6rem;
+  height: 5rem;
+  padding-left: 0rem;
+  padding-right: 0rem;;
+  font-size: 1rem
+}
+.xbutton:hover {
+  background: $aaColor;
+  color: white;
+}
+.xbutton-icon {
+  color: inherited;
+  font-size: 3rem;
+  padding-top: .7rem; 
+}
+.xbutton-icon:hover {
+  //background: yellow;
+  color: white;
+}
+
+.xbutton-off {
+  @extend .xbutton;
+  color: lightgray;
+}
+.xbutton-off:hover {
+  background: white;
+  color: white;
+}
+
+.selected-item {
+  background: lightgray;
+}
+// Standard Margin and Padding classes
+
+// .marg0 { margin: 0; }
+// .marg1 { margin: .2rem; }
+// .marg2 { margin: .4rem; }
+// .marg3 { margin: .6rem; }
+// .marg4 { margin: .8rem; }
+// .marg5 { margin: 1.0rem; }
+// .marg6 { margin: 1.2rem; }
+// .marg7 { margin: 1.4rem; }
+// .marg8 { margin: 1.6rem; }
+// .marg9 { margin: 1.8rem; }
+// .marg10 { margin: 2.0rem; }
+
+// .marg-t0 { margin-top: 0; }
+// .marg-t1 { margin-top: .2rem; }
+// .marg-t2 { margin-top: .4rem; }
+// .marg-t3 { margin-top: .6rem; }
+// .marg-t4 { margin-top: .8rem; }
+// .marg-t5 { margin-top: 1.0rem; }
+// .marg-t6 { margin-top: 1.2rem; }
+// .marg-t7 { margin-top: 1.4rem; }
+// .marg-t8 { margin-top: 1.6rem; }
+// .marg-t9 { margin-top: 1.8rem; }
+// .marg-t10 { margin-top: 2.0rem; }
+
+// .marg-r0 { margin-right: 0; }
+// .marg-r1 { margin-right: .2rem; }
+// .marg-r2 { margin-right: .4rem; }
+// .marg-r3 { margin-right: .6rem; }
+// .marg-r4 { margin-right: .8rem; }
+// .marg-r5 { margin-right: 1.0rem; }
+// .marg-r6 { margin-right: 1.2rem; }
+// .marg-r7 { margin-right: 1.4rem; }
+// .marg-r8 { margin-right: 1.6rem; }
+// .marg-r9 { margin-right: 1.8rem; }
+// .marg-r10 { margin-right: 2.0rem; }
+
+// .marg-b0 { margin-bottom: 0; }
+// .marg-b1 { margin-bottom: .2rem; }
+// .marg-b2 { margin-bottom: .4rem; }
+// .marg-b3 { margin-bottom: .6rem; }
+// .marg-b4 { margin-bottom: .8rem; }
+// .marg-b5 { margin-bottom: 1.0rem; }
+// .marg-b6 { margin-bottom: 1.2rem; }
+// .marg-b7 { margin-bottom: 1.4rem; }
+// .marg-b8 { margin-bottom: 1.6rem; }
+// .marg-b9 { margin-bottom: 1.8rem; }
+// .marg-b10 { margin-bottom: 2.0rem; }
+
+// .marg-l0 { margin-left: 0; }
+// .marg-l1 { margin-left: .2rem; }
+// .marg-l2 { margin-left: .4rem; }
+// .marg-l3 { margin-left: .6rem; }
+// .marg-l4 { margin-left: .8rem; }
+// .marg-l5 { margin-left: 1.0rem; }
+// .marg-l6 { margin-left: 1.2rem; }
+// .marg-l7 { margin-left: 1.4rem; }
+// .marg-l8 { margin-left: 1.6rem; }
+// .marg-l9 { margin-left: 1.8rem; }
+// .marg-l10 { margin-left: 2.0rem; }
+
+// .pad0 { padding: 0; }
+// .pad1 { padding: .2rem; }
+// .pad2 { padding: .4rem; }
+// .pad3 { padding: .6rem; }
+// .pad4 { padding: .8rem; }
+// .pad5 { padding: 1.0rem; }
+// .pad6 { padding: 1.2rem; }
+// .pad7 { padding: 1.4rem; }
+// .pad8 { padding: 1.6rem; }
+// .pad9 { padding: 1.8rem; }
+// .pad10 { padding: 2.0rem; }
+
+// .pad-t0 { padding-top: 0; }
+// .pad-t1 { padding-top: .2rem; }
+// .pad-t2 { padding-top: .4rem; }
+// .pad-t3 { padding-top: .6rem; }
+// .pad-t4 { padding-top: .8rem; }
+// .pad-t5 { padding-top: 1.0rem; }
+// .pad-t6 { padding-top: 1.2rem; }
+// .pad-t7 { padding-top: 1.4rem; }
+// .pad-t8 { padding-top: 1.6rem; }
+// .pad-t9 { padding-top: 1.8rem; }
+// .pad-t10 { padding-top: 2.0rem; }
+
+// .pad-r0 { padding-right: 0; }
+// .pad-r1 { padding-right: .2rem; }
+// .pad-r2 { padding-right: .4rem; }
+// .pad-r3 { padding-right: .6rem; }
+// .pad-r4 { padding-right: .8rem; }
+// .pad-r5 { padding-right: 1.0rem; }
+// .pad-r6 { padding-right: 1.2rem; }
+// .pad-r7 { padding-right: 1.4rem; }
+// .pad-r8 { padding-right: 1.6rem; }
+// .pad-r9 { padding-right: 1.8rem; }
+// .pad-r10 { padding-right: 2.0rem; }
+
+// .pad-b0 { padding-bottom: 0; }
+// .pad-b1 { padding-bottom: .2rem; }
+// .pad-b2 { padding-bottom: .4rem; }
+// .pad-b3 { padding-bottom: .6rem; }
+// .pad-b4 { padding-bottom: .8rem; }
+// .pad-b5 { padding-bottom: 1.0rem; }
+// .pad-b6 { padding-bottom: 1.2rem; }
+// .pad-b7 { padding-bottom: 1.4rem; }
+// .pad-b8 { padding-bottom: 1.6rem; }
+// .pad-b9 { padding-bottom: 1.8rem; }
+// .pad-b10 { padding-bottom: 2.0rem; }
+
+// .pad-l0 { padding-left: 0; }
+// .pad-l1 { padding-left: .2rem; }
+// .pad-l2 { padding-left: .4rem; }
+// .pad-l3 { padding-left: .6rem; }
+// .pad-l4 { padding-left: .8rem; }
+// .pad-l5 { padding-left: 1.0rem; }
+// .pad-l6 { padding-left: 1.2rem; }
+// .pad-l7 { padding-left: 1.4rem; }
+// .pad-l8 { padding-left: 1.6rem; }
+// .pad-l9 { padding-left: 1.8rem; }
+// .pad-l10 { padding-left: 2.0rem; }
+
+.ht10 { height: 10%; }
+.ht20 { height: 20%; }
+.ht30 { height: 30%; }
+.ht40 { height: 40%; }
+.ht50 { height: 50%; }
+.ht60 { height: 60%; }
+.ht70 { height: 70%; }
+.ht80 { height: 80%; }
+.ht90 { height: 90%; }
+.ht100 { height: 100%; }
+
+.wd10 { width: 10%; }
+.wd20 { width: 20%; }
+.wd30 { width: 30%; }
+.wd40 { width: 40%; }
+.wd50 { width: 50%; }
+.wd60 { width: 60%; }
+.wd70 { width: 70%; }
+.wd80 { width: 80%; }
+.wd90 { width: 90%; }
+.wd100 { width: 100%; }
+
+// '.mat-dialog-container' for increased specificity
+.x-mat-container .mat-dialog-container {
+  padding: 0;
+  //background: yellow;
+  // overflow: hidden;
+  // resize: both;
+  // max-width: 100vw;
+  // max-height: 100vh;
+}
+
+.std-italic-font {
+  font-style: italic !important;
+}
+
+.std-underlined-font {
+  text-decoration: underline !important;
+}
+
+// Select Panel Height
+
+// .selet-height1 {
+//   max-height: 80vh !important;
+// }
+
+// $custom-typography: mat-typography-config(
+//   $font-family: "Source Sans Pro, sans-serif",
+// );
+// @include mat-core($custom-typography);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

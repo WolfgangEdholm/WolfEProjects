@@ -1,0 +1,148 @@
+@import "src/styles";
+
+.dialog-title {
+  margin: -24px -24px 0px -24px;
+  padding: 10px 24px;
+  //cursor: move;
+  //background: lightblue;
+  //padding: 0;
+  //margin: 0;
+}
+
+.dialog-content {
+  width: 100%;
+  //background: lightgreen;
+}
+
+.input-field {
+  width: 100%;
+  //background: yellow;
+}
+
+// .code-ta {
+//   resize: both !important;
+// }
+
+.message {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.error-color {
+  color: red;
+}
+
+.error-color .mat-checkbox-frame {
+  border-color: red;
+}
+
+.xpanel {
+  //background: orange;
+  //height: 600px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  //min-width: 350px !important;
+  max-width: 90vw !important;
+  max-height: 70vh !important;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  //background: lightblue;
+}
+
+.control-sub-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  //background: lightblue;
+}
+
+// .function-select {
+//   width: 12rem;
+// }
+
+// .operator-select {
+//   margin-left: 2rem;
+//   width: 12rem;
+// }
+
+// .column-select {
+//   margin-left: 2rem;
+//   width: 12rem;
+// }
+
+.justification-select {
+  width: 12rem;
+}
+
+// .test-group {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+// }
+
+// .value-check {
+//   margin-right: 2rem;
+// }
+
+// .test-button {
+//   height: 2.2rem;
+// }
+
+
+.right-checkbox {
+  margin-right: .1rem;
+  width: 15rem;
+}
+
+.groupby-compatible {
+  margin-bottom: 1rem;
+}
+
+.db-type-select {
+  width: 12rem;
+}
+
+.change-fixex-date {
+  width: 12rem;
+}
+
+.dialog-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dialog-delete {
+  background: transparent;
+}
+
+.dialog-ok-and-cancel {
+  background: transparent;
+}
+
+// ::ng-deep.mat-dialog-container{
+//   //max-width: 1000px; // Doesn't work
+//   max-height: 1000px !important;
+//   resize: both;
+// }
+
+// [mat-dialog-title] {
+//   margin: -24px -24px 0px -24px;// !important;
+//   padding: 10px 24px;
+//   cursor: move;
+//   text-align: center;
+// }

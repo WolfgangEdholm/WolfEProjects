@@ -1,0 +1,85 @@
+
+
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ data.modalTitle }}
+  </h4>
+
+    <form [formGroup]="form">
+      <div class="dialog-content">
+
+        <div>
+          <mat-checkbox
+            formControlName="makeCopy"
+          >
+            Ccopy Query
+          </mat-checkbox>
+        </div>
+
+        <mat-form-field>
+          <mat-label>Query Name</mat-label>
+          <input
+            matInput
+            formControlName="docName"
+            autocomplete="off"
+          >
+          <p
+            class="error-message"
+            *ngIf="docNameError"
+          >{{ docNameError }}</p>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Query Database</mat-label>
+          <mat-select
+            formControlName="docDbSelect"
+            panelClass="xpanel"
+            (selectionChange)="databaseSelectionChange($event)"
+          >
+            <mat-option *ngFor="let db of allDbNames" [value]="db">
+              {{ db }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div [ngClass]="g.formIsOutline ? 'doc-list' : 'doc-list-sq'">
+          <div *ngIf="currDocDbHasDoc()">
+            <div *ngFor="let dItem of currDocDb.items">
+              <span>{{ dItem.name }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <div class="dialog-delete">
+          <button mat-button (click)="md2.deleteClick($event)">
+            Don't Save
+          </button>
+        </div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="md2.cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="md2.okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

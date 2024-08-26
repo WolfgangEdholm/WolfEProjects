@@ -1,0 +1,275 @@
+
+<div class="page-wrapper">
+
+  <div class="table-wrapper">
+
+    <div class="table-title-row">
+      <div class="table-title-view-controller">
+
+        <div
+          *ngIf="dataEng.hasGroupBy()"
+          class=table-title-toggle-view>
+          <button
+            mat-button class="table-title-button"
+            (click)="toggleGroupView()"
+          >
+          <h4 class="add-column-text">
+            <mat-icon
+              class="add-column-icon"
+              fontSet="material-icons-outlined"
+            >change_circle
+            </mat-icon>
+            {{ dataEng.isGroupDisplay ? 'Group Row View' : 'Row View' }}
+          </h4>   
+          </button>
+        </div>
+        <div
+          *ngIf="!dataEng.hasGroupBy()"
+          class=table-title-toggle-view>
+          <button
+            mat-button class="table-title-button"
+            (click)="addGroupBy()"
+          >
+          <h4 class="add-column-text">
+            <mat-icon
+              class="add-column-icon"
+              fontSet="material-icons-outlined"
+            >add
+            </mat-icon>
+              Add GroupBy
+          </h4>   
+          </button>
+        </div>
+      </div>
+
+      <div class="table-title-title">
+        <button
+          mat-button class="table-title-title-button"
+          (click)="editQuery()"
+        >
+          <mat-icon class="table-title-title-icon">edit</mat-icon>
+        </button>
+        <h3 class="table-title-title-text">
+          {{ qd.currQueryName }}
+        </h3>
+      </div>
+
+      <div class=table-title-add-column>
+        <button
+          mat-button class="table-title-button"
+          (click)="addComputed()"
+        >
+        <h4 class="add-column-text">
+          <mat-icon class="add-column-icon">add</mat-icon>
+          Add Computed
+        </h4>   
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="help?.length > 0"
+      class="help-row" 
+    >
+      {{ help }}
+    </div>
+
+    <div
+      class="query"
+      [ngClass]="help?.length > 0 ? 'query-height2' : 'query-height1'"
+    >
+      <mat-table
+        [dataSource]="dataSource"
+
+        cdkDropList
+        cdkDropListLockAxis="x"
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+
+        matSort
+        [matSortDisabled]="sortIsDisabled()"
+        [matSortActive]="sortActive"
+        [matSortDirection]="sortDirection"
+        (matSortChange)="sortChange($event)"
+      >
+      <ng-container matColumnDef="#">
+        <mat-header-cell
+          class="header-cell row-num"
+          *matHeaderCellDef
+        >#
+        </mat-header-cell>
+        <mat-cell
+          class="row-num"
+          (click)="onSelectColumn(NO_SELECTION)"
+          *matCellDef="let row; let i = index"
+        >{{ rowNum(i) }}
+        </mat-cell>
+      </ng-container>
+
+      <div *ngIf="dataEng.hasGroupBy()">
+        <ng-container matColumnDef="groupBy">
+          <mat-header-cell
+            class="header-cell group-by"
+            *matHeaderCellDef
+          >Group By(
+          </mat-header-cell>
+          <mat-cell
+            class="group-by"
+            (click)="onSelectColumn(NO_SELECTION)"
+            *matCellDef="let row; let i = index"
+          >{{ groupNum(i) }}
+          </mat-cell>
+        </ng-container>
+      </div>
+
+      <ng-container
+        *ngFor="let column of dataEng.getFixedNameArr() let c = index"
+        [matColumnDef]="column"
+      >
+        <mat-header-cell
+          class="header-cell"
+          [ngClass]="headerClass(c)"
+          cdkDrag [cdkDragDisabled]="isDraggingDisabled(c)"
+          mat-sort-header [disabled]="isSortingDisabled(c)"
+          *matHeaderCellDef
+          (click)="sortClick($event)"
+        >
+          <div *ngIf="column !== groupByEnd">
+            <mat-icon (click)="editColumn(c); $event.stopPropagation()"
+            >edit</mat-icon>
+          </div>
+          {{ title(c) | titlecase }}
+        </mat-header-cell>
+        <mat-cell
+          [ngClass]="cellClass(c)"
+          [style.background-color]="c === selectedColCd ? 'lightgray' : ''"
+          (click)="onSelectColumn(c)"
+          *matCellDef="let sourceNum; let r = index"
+        >{{ cellIsNumber(c) ? (cellValue(sourceNum, c) | number:'0.0-2') :
+          cellValue(sourceNum, c) }}  
+        <!-- 
+        >{{ cellIsNumber(c) ? (cellValue(sourceNum, c) | number:'0.0-2') :
+            cellValue(sourceNum, c) }}          
+        -->
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="dataEng.getMasterNameArr(); sticky: true"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: dataEng.getMasterNameArr()"
+      ></mat-row>
+
+      </mat-table>
+
+      <mat-paginator [pageSize]="1000" [pageSizeOptions]="[20, 40, 100, 1000]">
+      </mat-paginator>
+
+    </div>
+        
+    <mat-card
+      [className]="css.xcardBgClasses('xcard-col-full')"   
+      [ngStyle]="css.xcardBgStyles()"
+    >
+      <mat-card-actions class="xform-action-bg">
+
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+          (click)="onToQuery()"
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon"
+          >content_copy
+          </mat-icon>
+          <span><br>Query spec</span>
+        </button>
+
+        <!-- 
+          [disabled]="removeIsDisabled"
+          [disabled]="editIsDisabled"
+          [disabled]="saveIsDisabled"
+          [disabled]="saveDataIsDisabled"
+        -->
+
+        <!-- 
+
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+          color="warn"
+
+          (click)="onRemove()"
+        >
+
+          <mat-icon
+            inline=true
+            class="xbutton-icon"
+          >
+            delete_outline
+          </mat-icon>
+          <span><br>Remove</span>
+        </button>
+
+        -->
+
+
+
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+          color="warn"
+
+          (click)="onEdit()"
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon"
+            fontSet="material-icons-outlined"
+          >edit
+          </mat-icon>
+          <span><br>Edit</span>
+        </button>
+
+        <button
+          mat-button
+          class="xbutton"
+
+          (click)="onSaveQuery($event)"  
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon"
+            fontSet="material-icons-outlined"
+          >save
+          </mat-icon>
+          <span><br>Save</span>
+        </button>
+
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+
+          (click)="onSaveData($event)"  
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon"
+          >system_update_alt
+          </mat-icon>
+          <span><br>Run (save data)</span>
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  </div>
+
+</div>

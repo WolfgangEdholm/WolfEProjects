@@ -1,0 +1,39 @@
+
+
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >Grow Test
+    </h4>
+
+    <mat-divider></mat-divider>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <div class="dialog-delete">
+          <button mat-button (click)="deleteClick($event)">
+            Don't Save
+          </button>
+        </div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

@@ -1,0 +1,320 @@
+
+<div *ngIf="initialized">
+  <div
+    class="outer"
+    cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+    fxLayout="column"
+    fxLayoutAlign="start center"
+  >
+    <div class="dialog">
+      <h4 mat-dialog-title class="dialog-title"
+        cdkDragHandle
+      >
+        {{ title }}
+      </h4>
+      <div class="dialog-content">
+        <form [formGroup]="form">
+
+          <ng-container *ngIf="!isTP">
+            <mat-form-field class="wide">
+              <mat-label>Filter name</mat-label>
+              <input
+                matInput
+                [formControlName]="DISPLAYNAME"
+                [placeholder]="rFilter.fc.dfltDisplayName"
+                autocomplete="off"
+              >
+              <p
+                class="error-message"
+                *ngIf="displayNameError"
+              >{{ displayNameError }}</p>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="useInputDbTablePicker; else elseNoPicker ">
+            <div>
+
+              <mat-form-field class="wide">
+                <mat-label>{{ 'Database of ' + inputDbTableLabel }}</mat-label>
+                <mat-select
+                  [formControlName]="INPUTTABLE + 'Database'"
+                  panelClass="xpanel"
+                  (selectionChange)="databaseSelectionChange($event)"
+                >
+                  <mat-option *ngFor="let db of allDbNames" [value]="db">
+                    {{ db }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="wide">
+                <mat-label>{{ inputDbTableLabel }}</mat-label>
+                <input
+                  matInput
+                  [formControlName]="INPUTTABLE"
+                  [placeholder]="inputDbTableType"
+                  [matAutocomplete]="otAuto"
+                >
+                <p
+                  class="error-message"
+                  *ngIf="inputDbTableError"
+                >{{ inputDbTableError }}</p>
+                <mat-autocomplete #otAuto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let tbl of allTableNames" [value]="tbl"
+                  >{{ tbl }}
+                  </mat-option>
+                  <!-- 
+                  <mat-option
+                    *ngFor="let tbl of filteredTables | async" [value]="tbl"
+                  >{{ tbl }}
+                  </mat-option>                    
+                  -->
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </ng-container>
+
+          <ng-template #elseNoPicker>
+            <mat-form-field class="wide">
+              <mat-label>{{ outputDbTableLabel }}</mat-label>
+              <input
+                matInput
+                [formControlName]="OUTPUTTABLE"
+                placeholder="TableName"
+                autocomplete="off"
+              >
+              <p
+                class="error-message"
+                *ngIf="inputDbTableError"
+              >{{ inputDbTableError }}</p>
+            </mat-form-field>
+          </ng-template>
+
+          <div *ngIf="!skipOutputDbTable">
+            <mat-form-field class="wide">
+              <mat-label>{{ outputDbTableLabel }}</mat-label>
+              <input
+                matInput
+                [formControlName]="OUTPUTTABLE"
+                placeholder="TableName"
+                autocomplete="off"
+              >
+              <p
+                class="error-message"
+                *ngIf="outputDbTableError"
+              >{{ outputDbTableError }}</p>
+            </mat-form-field>
+          </div>
+
+
+          <div *ngIf="!hideIsTemporary">
+            <mat-checkbox
+              class="bmarg"
+              [formControlName]="ISTEMPORARY"
+              (change)="isTemporaryChange($event)"
+            >{{ isTemporaryLabel }}
+            </mat-checkbox>
+          </div>    
+
+          <div *ngIf="!isTemporary && !hideIsTemporary">
+            <mat-checkbox
+              class="bmarg"
+              [formControlName]="DOWNSTREAMCHANGES"
+            >Downstream changes are necessary
+            </mat-checkbox>
+          </div>
+          
+          <div *ngIf="hasFixUpstream">
+            <mat-checkbox
+              class="bmarg error-color"
+              [formControlName]="FIXUPSTREAMCHANGES"
+            >Adjust for upstream changes
+            </mat-checkbox>
+          </div>    
+
+          <ng-container
+            *ngFor="let field of rFilter.rParams let ix = index"
+          >
+            <div [ngSwitch]="field.fp.tp">
+
+              <div
+                *ngSwitchCase="'boolean'"
+              >
+                <mat-checkbox
+                  class="bmarg"
+                  [formControlName]="field.fp.name"
+                >
+                  {{ field.fp.displayName }}
+                </mat-checkbox>
+              </div>
+
+              <div
+                *ngSwitchCase="'string'">
+                <mat-form-field class="wide">
+                  <mat-label>{{ field.fp.displayName }}</mat-label>
+                  <input
+                    matInput
+                    [formControlName]="field.fp.name"
+                    [placeholder]="getString(field.fp.placeholder)"
+                    autocomplete="off"
+                  >
+                  <p
+                    class="error-message"
+                    *ngIf="field.error"
+                  >{{ field.error }}</p>
+                </mat-form-field>
+              </div>
+
+              <div
+                *ngSwitchCase="'tableName'">
+                <mat-form-field class="wide">
+                  <mat-label>{{ field.fp.displayName }}</mat-label>
+                  <input
+                    matInput
+                    [formControlName]="field.fp.name"
+                    [placeholder]="getString(field.fp.placeholder)"
+                    autocomplete="off"
+                  >
+                  <p
+                    class="error-message"
+                    *ngIf="field.error"
+                  >{{ field.error }}</p>
+                </mat-form-field>
+              </div>
+
+              <div
+                *ngSwitchCase="'tablePicker'">
+
+                <mat-form-field class="wide">
+                  <mat-label>{{ paramHeaders[ix] }}</mat-label>
+                  <mat-select
+                    [formControlName]="field.fp.name + '_db'"
+                    panelClass="xpanel"
+                    (selectionChange)="paramDatabaseSelectionChange(ix, $event)"
+                  >
+                    <mat-option *ngFor="let db of allDbNames" [value]="db">
+                      {{ db }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field class="wide">
+                  <mat-label>{{ field.fp.displayName }}</mat-label>
+                  <input
+                    matInput
+                    [formControlName]="field.fp.name"
+                    [placeholder]="getString(field.fp.placeholder)"
+                    [matAutocomplete]="paramAuto"
+                  >
+                  <mat-autocomplete #paramAuto="matAutocomplete">
+                    <mat-option
+                      *ngFor="let tbl of paramTableNames[ix]" [value]="tbl"
+                    >{{ tbl }}
+                    </mat-option>
+                    <!-- 
+                    <mat-option
+                      *ngFor="let tbl of fiteredTables | async" [value]="tbl"
+                    >{{ tbl }}
+                    </mat-option>                    
+                    -->
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div
+                *ngSwitchCase="'stringDropdown'">
+                <mat-form-field class="wide">
+                  <mat-label>{{ field.fp.displayName }}</mat-label>
+                  <mat-select
+                    matInput
+                    [formControlName]="field.fp.name"
+                  >
+                    <mat-option
+                      *ngFor="let item of getStringArr(field.fp.placeholder)"
+                      [value]="item">
+                      {{ item }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+          </ng-container>
+
+        </form>
+
+        <p>{{ listHeaders[0] }}</p>
+
+        <div *ngIf="lists.length > 0"
+          class="display-list"
+        >
+
+          <div *ngFor="let lItem of lists[0].items">
+            <span>{{ lItem }}</span>
+          </div>
+        </div>
+
+        <div *ngIf="buttons.length > 0">
+          <ng-container
+            *ngFor="let btn of buttons; let ix = index;"
+          >
+            <div>
+              <button
+                mat-stroked-button
+                [ngClass]="buttonClass(ix)"
+                (click)="buttonClick(ix, $event)"
+              >{{ buttonLabels[ix] }}
+              </button>
+              <p
+                class="error-message"
+                *ngIf="buttonErrors[ix]"
+              >{{ buttonErrors[ix] }}</p>
+            </div>
+
+          </ng-container>
+        </div> 
+
+        <div *ngIf="execItem.integrityErrors.length > 0"
+          class="integrity-errors"
+        >
+          <mat-divider></mat-divider>
+          <ng-container
+            *ngFor="let ie of execItem.integrityErrors;"
+          >
+            <p
+              class="integrity-lines"
+            >{{ ie }}
+            </p>
+  
+          </ng-container>
+        </div> 
+
+      </div> 
+
+      <mat-divider></mat-divider>
+      <mat-dialog-actions class="dialog-actions">
+
+        <div>
+          <div class="dialog-delete">
+            <button mat-button (click)="md2.deleteClick($event)">
+              Don't Save
+            </button>
+          </div>
+        </div>
+
+        <div class="dialog-ok-and-cancel">
+          <button mat-button (click)="md2.cancelClick($event)">
+            Cancel
+          </button>
+
+          <button mat-button cdkFocusInitial (click)="md2.okClick($event)">
+            OK
+          </button>
+        </div>
+
+      </mat-dialog-actions>
+    </div>
+  </div>
+</div>

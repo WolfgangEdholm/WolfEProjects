@@ -1,0 +1,91 @@
+<div
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div class="dialog">
+    <h1 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ 'Query Editor' }}
+    </h1>
+
+    <mat-dialog-content class="dialog-content">
+
+      <form [formGroup]="form">
+
+        <div class="groupby-row">
+          <mat-checkbox
+            formControlName="hasGroupBy"
+            class="groupby"
+            color="primary"
+            (change)="groupbyChange($event)"
+          >GroupBy</mat-checkbox>
+  
+          <ng-container>
+            <mat-form-field class="groupby-columns">
+              <mat-label>Columns</mat-label>
+              <mat-select
+                formControlName="selectedColumns"
+                multiple
+                panelClass="xpanel"
+                (selectionChange)="columnSelectionChange($event)"
+              >
+              <mat-option *ngFor="let val of data.allVisibleColumns" [value]="val">
+                {{ val }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </div>
+
+        <!-- 
+                (selectionChange)="valueSelectionChange($event)"
+                (openedChange)="openedChange($event)"
+        -->
+
+        <div class="modal-row">
+          <ng-container>
+            <mat-form-field class="groupby-columns">
+              <mat-label>Hidden Columns</mat-label>
+              <mat-select
+                formControlName="hiddenColumns"
+                multiple
+                panelClass="xpanel"
+                (selectionChange)="hiddenColumnSelectionChange($event)"
+              >
+              <mat-option *ngFor="let val of data.allHideableColumns" [value]="val">
+                {{ val }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </div>
+
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <!-- 
+        <div class="dialog-delete">
+          <button mat-button (click)="deleteClick($event)">
+            Delete
+          </button>
+        </div>
+        -->
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

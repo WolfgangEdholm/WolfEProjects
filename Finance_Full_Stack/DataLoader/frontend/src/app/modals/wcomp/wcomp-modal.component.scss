@@ -1,0 +1,175 @@
+@import "src/styles";
+
+.outer {
+  box-sizing: border-box;
+  overflow: hidden;
+  resize: both;
+  min-width: 30rem;
+  min-height: 20vh;
+  max-width: 80vw;
+  max-height: 80vh;
+}
+
+// .dialog-title {
+//   margin: -24px -24px 0px -24px;
+//   padding: 10px 24px;
+//   //cursor: move;
+//   //background: lightblue;
+//   //padding: 0;
+//   //margin: 0;
+// }
+
+// .dialog-content {
+//   width: 100%;
+//   //background: lightgreen;
+// }
+
+.dialog {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  //justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  max-width: 80vw;
+  max-height: 80vh;
+}
+
+.dialog-title {
+  max-width: 80vw;
+  max-height: 80vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.dialog-content {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 1rem 1rem 1rem 0;
+  //padding: .6rem 1.6rem;
+  //background: lightgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  //justify-content: space-between;
+  // max-width: 80vw;
+  // max-height: 80vh;
+  font-size: .9rem;
+}
+
+.input-area {
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  //background: yellow;
+  flex: 1;
+  //background: yellow;
+}
+
+.input-field {
+  width: 100%;
+  //background: yellow;
+}
+
+.input-field-code{
+  width: 100%;
+  //font-family: "Lucida Console", "Courier New", monospace;
+  //font-family: "Monaco", "Courier New", monospace;
+  font-family: "Menlo", "Courier New", monospace;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.xpanel {
+  //background: orange;
+  //height: 600px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  //min-width: 350px !important;
+  max-width: 90vw !important;
+  max-height: 70vh !important;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  //align-items: center;
+  align-items: stretch;
+  //background: lightblue;
+  flex: 0;
+}
+
+.function-select {
+  width: 12rem;
+}
+
+.operator-select {
+  margin-left: 2rem;
+  width: 12rem;
+}
+
+.column-select {
+  margin-left: 2rem;
+  width: 12rem;
+}
+
+.justification-select {
+  width: 12rem;
+}
+
+.test-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.value-check {
+  margin-right: 2rem;
+}
+
+.test-button {
+  height: 2.2rem;
+}
+
+.db-type-select {
+  width: 12rem;
+}
+
+.groupby-compatible {
+  margin-left: 2rem;
+}
+
+.downstream-change {
+  margin-top: 15px;
+  margin-right: .1rem;
+}
+
+.dialog-actions {
+  width: calc(100% - 2rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 1rem;
+}
+
+.dialog-delete {
+  background: transparent;
+}
+
+.dialog-ok-and-cancel {
+  background: transparent;
+}

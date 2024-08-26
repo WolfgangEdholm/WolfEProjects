@@ -1,0 +1,282 @@
+<section class="xsection">
+  <!-- 
+*ngIf="!eng.isLoading && uie.forms[0]"
+  -->
+
+  <div class="data-wrapper"
+    *ngIf="!eng.isLoading && uie.forms[0]"
+  >
+
+     <!-- left column -->
+     <div 
+      [fxFlex]="leftColumnSize + '%'"
+    >
+      <app-side-panel
+        topTitle="Segments"
+        topIconName="view_week"
+        topDrag="false"
+        [topIx]="lpTopIx"
+        [topSelectCallback]="onEdit"
+        [topRebuildCallback]="rebuildTopLeftPane"
+        [topItemHeight]="2.5"
+        [topChildItemHeight]="2.5"
+        [topSelectChild]="true"
+      >
+      </app-side-panel>
+    </div>
+
+    <!-- right column -->
+    <div
+      [fxFlex]="rightColumnSize + '%'"
+      class="xcard-col-bg"
+    >
+      <mat-card
+        [className]="css.xcardBgClasses('xcard-col-right')"   
+        [ngStyle]="css.xcardBgStyles()"
+      >
+        <form 
+          class="xform"
+          [formGroup]="uie.forms[0]"
+          autocomplete="off"
+          (ngSubmit)="onSubmit()"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <mat-card-content class="xform">
+
+            <div class="xform-row name-row">
+              <div
+                [className]="css.segmentNameInputCardClass('name-input-card')"
+                [ngStyle]="css.segmentNameInputCardStyles()"
+              >
+                <input
+                  class="name-input"
+                  formControlName="name"
+                  placeholder="Name"
+                  type="text"
+                >
+              </div>
+              <span class="name-type">
+                {{ prettyPrintTypes[eng.getTypeNum(eng.currSegment.type)] }}
+              </span>
+            </div>
+
+          </mat-card-content>
+
+          <div
+            *ngIf="eng.currSegment && (eng.currSegment.type === 'BALLET' || eng.currSegment.type === 'SUPER')"
+            [className]="css.xShadowOrBorder('positions-card')">
+            <div>
+              <div *ngIf="eng.currSegment"
+                cdkDropList
+                cdkDropListOrientation="vertical"
+                (cdkDropListDropped)="onMovePosition($event)"
+              >
+                <div *ngFor="let position of eng.currSegment.positions; let i = index"
+                  cdkDrag
+                >
+                  <div *ngIf="position.id >= 0">
+                    <div
+                      *ngIf="!position.isEdited; else editingPosition"
+                    >
+                      <div
+                      class="position-container">
+                        <div [className]="css.xShadowOrUnderline('position-card')">
+                          <h2
+                            class="position-name"
+                            [class.std-italic-font]="position.siblingId > 0"
+                          >
+                            {{ position.name }}
+                          </h2>
+                          <h2
+                            *ngIf="eng.currSegment.type === 'BALLET'"
+                            class="position-size"
+                          >
+                            # Dancers ={{ position.dancerCount }}
+                          </h2>
+                        </div>
+                        <div class="add-button-height-container">
+                          <button
+                              mat-icon-button
+                              type="button"
+                              aria-label="Edit Position Button"
+                              class="narrow-button"
+                              (click)="onEditPosition(i)">
+                            <mat-icon
+                                inline=true
+                                class="narrow-button-icon">
+                              create
+                            </mat-icon>
+                          </button>
+                          <button
+                              mat-icon-button
+                              type="button"
+                              aria-label="Delete Position Button"
+                              class="narrow-button"
+                              (click)="onDeletePosition(i)">
+                            <mat-icon
+                                inline=true
+                                class="narrow-button-icon">
+                              delete
+                            </mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-template #editingPosition>
+                      <div class="position-edit-row">
+                        <div class="position-edit-container">
+                          <app-text-input
+                            [fieldName]="calcEditFieldName(i,'n')"
+                            title="Name"
+                            [className]="eng.currSegment.type === 'BALLET' ? 'wd70' : 'wd100'"   
+                          >
+                          </app-text-input>
+                          <app-text-input
+                            *ngIf="eng.currSegment.type === 'BALLET'"
+                            [fieldName]="calcEditFieldName(i,'dc')"
+                            title="# Dancers"
+                            class="wd30">
+                          </app-text-input>
+                        </div>
+
+                        <div class="add-button-height-container">
+                          <button
+                            mat-icon-button
+                            type="button"
+                            aria-label="Edit Position Button"
+                            class="narrow-button"
+                            cdkDragHandle
+                          >
+                            <mat-icon
+                                inline=true
+                                class="narrow-button-icon">
+                              swap_vert
+                            </mat-icon>
+                          </button>
+                          <button
+                            mat-icon-button
+                            type="button"
+                            aria-label="Delete Position Button"
+                            class="narrow-button"
+                            (click)="onDeletePosition(i)"
+                          >
+                            <mat-icon
+                              inline=true
+                              class="narrow-button-icon"
+                            >
+                              delete
+                            </mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="add-button-width-container-right">
+              <div class="add-button-height-container">
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Add Position Button"
+                  class="narrow-button"
+
+                  >
+                  <mat-icon
+                    inline=true
+                    class="narrow-button-icon"
+                    (click)="onAddPosition()"
+                  >
+                    add
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <mat-card-actions class="xform-action-bg">
+
+            <button
+              mat-button
+              type="button"
+              class="xbutton"
+              color="warn"
+              (click)="onDelete()"
+            >
+              <mat-icon
+                inline=true
+                class="xbutton-icon"
+              >delete
+              </mat-icon>
+              <span><br>Delete</span>
+            </button>
+
+            <button
+              mat-button
+              type="button"
+              class="xbutton"
+              [matMenuTriggerFor]="addMenu"       
+            >
+
+              <mat-icon
+                inline=true
+                class="xbutton-icon"
+              >add
+              </mat-icon>
+              <span><br>Add</span>
+            </button>
+
+            <button
+              mat-button
+              class="xbutton"
+            >
+              <mat-icon
+                inline=true
+                class="xbutton-icon"
+              >save
+              </mat-icon>
+              <span><br>Save</span>
+            </button>
+
+          </mat-card-actions>
+
+          <!-- moved the menu here so it didn't affect the position of buttons -->
+          <mat-menu
+            #addMenu="matMenu"
+            xPosition="before"
+          >
+            <button
+              mat-menu-item
+              class="create-segment-menu-item"
+              (click)="onAdd(0)"
+            >
+              Create Segment
+            </button>
+            <button
+              mat-menu-item
+              class="create-segment-menu-item"
+              (click)="onAdd(1)"
+            >
+              Create Ballet
+            </button>
+            <button
+              mat-menu-item
+              class="create-segment-menu-item"
+              (click)="onAdd(2)"
+            >
+              Create Super Ballet
+            </button>
+          </mat-menu>
+
+        </form>
+      </mat-card>
+    </div>
+
+  </div>
+
+</section>
+

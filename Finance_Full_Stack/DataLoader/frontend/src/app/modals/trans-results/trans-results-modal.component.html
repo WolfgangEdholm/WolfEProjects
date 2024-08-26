@@ -1,0 +1,133 @@
+
+
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ data.dbTransName + ' finished running' }}
+    </h4>
+
+    <div class="dialog-content">
+
+      <table
+        mat-table
+        class="table"
+        [dataSource]="dataSource"
+      >
+
+        <ng-container matColumnDef="#"> 
+          <mat-header-cell
+            *matHeaderCellDef
+            class="index-col"
+          >#
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let item; let i = index;"
+            class="index-col"
+          >{{ i + 1 }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbTableName">
+          <mat-header-cell
+            *matHeaderCellDef
+          >Table
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let item"
+          >{{ item.ri.dbTableName }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell
+            *matHeaderCellDef
+          >Status
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let item"
+          >{{ item.ri.status }}
+          </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="rowCount">
+          <mat-header-cell
+            *matHeaderCellDef
+          >Rows
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let item"
+          >{{ item.ri.rowCount }}
+          </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="writtenAt">
+          <mat-header-cell
+            *matHeaderCellDef
+            class="written"
+          >Written
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let item"
+            class="written"
+          >{{ item.writtenAtString }}
+
+          </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="duration">
+          <mat-header-cell
+            *matHeaderCellDef
+          >Duration
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let item"
+          >{{ item.duration }}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+        ></mat-row>    
+
+      </table>   
+
+    </div>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <!-- 
+       <div class="dialog-delete">
+          <button mat-button (click)="deleteClick($event)">
+            Don't Save
+          </button>
+        </div>
+        -->
+ 
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <!-- 
+        <button mat-button (click)="cancelClick($event)">
+          Cancel
+        </button>
+        -->
+
+
+        <button mat-button cdkFocusInitial (click)="okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

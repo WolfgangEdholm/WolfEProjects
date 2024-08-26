@@ -1,0 +1,150 @@
+
+<section
+  class="xsection"
+>
+  <div
+    class="data-wrapper"
+    *ngIf="g.homeQueryPaneIx > -1 && g.homeFilterPaneIx > -1
+      && g.homeTransPaneIx > -1"
+  >
+    <!-- left column -->
+    <div
+      *ngIf="showLeftColumn"   
+      [fxFlex]="leftColumnSize + '%'"
+    >
+      <app-side-panel
+        column="left"
+
+        topTitle="Edit Query"
+        topDrag="false"
+        topIconName="policy"
+        topIconColor="#14c8c8"
+        [topPaneIx]="g.homeQueryPaneIx"
+        [topIx]="pd.sidePanelIx(g.homeQueryPaneIx)"
+        [topPaneSelectCallback]="pd.querySelectItem"
+        [topItemHeight]="2.5"
+      >
+      </app-side-panel>
+
+      <!-- 
+      <app-side-panel
+        column="left"
+
+        topTitle="Edit Query"
+        topDrag="false"
+        topIconName="policy"
+        topIconColor="#14c8c8"
+        [topPaneIx]="g.homeQueryPaneIx"
+        [topIx]="pd.sidePanelIx(g.homeQueryPaneIx)"
+        [topPaneSelectCallback]="pd.querySelectItem"
+        [topItemHeight]="2.5"
+
+        bottomTitle="Edit Filter"
+        bottomDrag="false"
+        bottomIconName="build"
+        bottomIconColor="#ffc800"
+        [bottomPaneIx]="g.homeFilterPaneIx"
+        [bottomIx]="pd.sidePanelIx(g.homeFilterPaneIx)"
+        [bottomPaneSelectCallback]="pd.filterSelectItem"
+        [bottomItemHeight]="2.5"
+      >
+      </app-side-panel>        
+      -->
+    </div>
+
+    <!-- center column -->
+    <div
+      [fxFlex]="centerColumnSize + '%'"
+      class="xcard-col-bg"
+    >
+      <mat-card
+        [className]="css.xcardBgClasses('xcard-col-center')"   
+        [ngStyle]="css.xcardBgStyles()"
+      >
+      <div class="center-container">
+        <p class="title">
+          <span>Data Loader For Google Cloud</span>
+        </p>
+
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+          (click)="app.queryNew()"
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon query-color"
+          >policy
+          </mat-icon>
+          <span><br>New Query</span>
+        </button>
+
+        <!-- 
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+          (click)="app.filterNew()"
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon filter-color"
+          >build
+          </mat-icon>
+          <span><br>New Filter</span>
+        </button>
+        -->
+
+        <button
+          mat-button
+          type="button"
+          class="xbutton"
+          (click)="app.transNew()"
+        >
+          <mat-icon
+            inline=true
+            class="xbutton-icon trans-color"
+          >account_tree
+          </mat-icon>
+          <span><br>New Transformer</span>
+        </button>
+
+      </div>
+
+      </mat-card>
+    </div>
+
+    <!-- right column -->
+    <div
+      *ngIf="showRightColumn"   
+      [fxFlex]="rightColumnSize + '%'"
+    >
+      <app-side-panel
+        column="right"
+        topTitle="Edit Transformer"
+        topDrag="false"
+        topIconName="account_tree"
+        topIconColor="#c8c8c8"
+        [topPaneIx]="g.homeTransPaneIx"
+        [topIx]="pd.sidePanelIx(g.homeTransPaneIx)"
+        [topPaneSelectCallback]="pd.transSelectItem"
+        [topItemHeight]="2.5"
+
+      >
+      <!-- 
+
+        bottomTitle="Filters"
+        [bottomIx]="lpBottomIx"
+        [bottomDropCallback]="onBottomDragReleased"
+        [bottomItemHeight]="2.5"
+      -->
+      </app-side-panel>
+    </div>
+
+  </div>
+
+</section>
+
+
+

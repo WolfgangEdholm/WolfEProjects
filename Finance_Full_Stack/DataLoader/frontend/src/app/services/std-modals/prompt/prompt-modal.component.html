@@ -1,0 +1,65 @@
+<section
+    fxLayout="column"
+    fxLayoutAlign="center center">
+  <div *ngIf="data.title.length > 0">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+  </div>
+  <mat-dialog-content class="dialog-content">
+    <div *ngIf="data.message.length > 0"
+      fxLayoutAlign="center center">
+      <h4>{{ data.message }}</h4>
+    </div>
+    <form [formGroup]="form">
+      <div *ngIf="data.placeholder1.length > 0">
+        <mat-form-field class="input-field">
+          <input matInput
+            [placeholder]="data.placeholder1"
+            formControlName="input1"
+          >
+        </mat-form-field>
+      </div>
+      <div *ngIf="data.placeholder2.length > 0">
+        <mat-form-field class="input-field">
+          <input matInput
+            [placeholder]="data.placeholder2"
+            formControlName="input2"
+          >
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions class="actions">
+    <div>
+      <div *ngIf="data.otherButton.length > 0">
+        <button
+          mat-button
+          (click)="modalButtonClick($event, 3)"
+        >
+          {{ data.otherButton }}
+        </button>
+      </div>
+    </div>
+
+    <div class="cancel-ok">
+
+      <div *ngIf="data.cancelButton.length > 0">
+        <button
+          mat-button
+          (click)="modalButtonClick($event, 2)"
+        >
+          {{ data.cancelButton }}
+        </button>
+      </div>
+
+      <button
+        mat-button
+        cdkFocusInitial
+        (click)="modalButtonClick($event, 1)"
+      >
+        {{ data.okButton }}
+      </button>
+
+    </div>
+
+  </mat-dialog-actions>
+</section>

@@ -1,0 +1,86 @@
+@import "src/styles";
+
+.outer {
+  box-sizing: border-box;
+  overflow: hidden;
+  //resize: horizontal;
+  resize: both;
+  min-width: 25vw;
+  min-height: 30vh;
+  // Doesn't work well if set to more than 80vw;
+  max-width: 80vw;
+  max-height: 80vh;
+}
+
+.dialog {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 80vw;
+  max-height: 80vh;
+}
+
+.dialog-title {
+  max-width: 80vw;
+  max-height: 80vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.dialog-content {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: .6rem 1.6rem;
+  //background: lightgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  // max-width: 80vw;
+  // max-height: 80vh;
+  font-size: .9rem;
+}
+
+// drop-down panel
+.xpanel {
+  max-height: 50vh !important;
+}
+
+// .value-select {
+//   box-sizing: border-box;
+//   width: 100%;
+// }
+
+.dialog-actions {
+  box-sizing: border-box;
+  width: 100%;
+  // Don't know why 2.4rem bottom margin was necessary
+  padding: 0 1.6rem 2.4rem 1.6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dialog-delete {
+  background: transparent;
+}
+
+.dialog-ok-and-cancel {
+  background: transparent;
+}
+
+// ::ng-deep.mat-dialog-container {
+//   //  border-radius: 13px !important; 
+//   resize: both !important; //Not working 
+//   overflow: auto;
+//   background: #fff;
+// }
+
+// ::ng-deep.cdk-overlay-pane{
+//   min-width: 256px;
+//   min-height: 555px;
+// }

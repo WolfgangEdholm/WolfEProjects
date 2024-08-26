@@ -1,0 +1,156 @@
+<section class="xsection">
+
+  <div
+    class="data-wrapper"
+    *ngIf="lpTopIx > -1"
+  >
+    <!-- left column -->
+    <div
+      *ngIf="showLeftColumn"   
+      [fxFlex]="leftColumnSize + '%'"
+    >
+      <!-- 
+        [topOpenCallback]="topItemOpenToggle"        
+      -->
+      <app-side-panel
+        topTitle="Tables"
+        topIconName="content_copy"
+        topIconColor="lightsteelblue"
+        [topIx]="lpTopIx"
+        [topIconClick]="topIconClick"
+        [topDropCallback]="onTopDragReleased"
+        [topSelectCallback]="topItemSelect"
+        [topRebuildCallback]="rebuildTopLeftPane"
+        [topHighlight]="topHighlight"
+        [topChildHighlight]="topChildHighlight"
+      >
+      </app-side-panel>
+    </div>
+
+    <!-- right column -->
+    <div
+      [fxFlex]="rightColumnSize + '%'"
+      class="xcard-col-bg"
+    >
+      <!-- 
+          #tableTarget="cdkDropList"        
+      -->
+      <mat-card
+        [className]="css.xcardBgClasses(showLeftColumn ? 'xcard-col-right' : 'xcard-col-center')"   
+        [ngStyle]="css.xcardBgStyles()"
+      >
+        <div
+          [className]="css.xShadowOrBorder('positions-card')"
+          cdkDropList
+          #scrollWrapper
+          [cdkDropListConnectedTo]="[tableSource]"
+        >
+          <canvas
+            class="table-canvas"
+            #xcanvas
+            (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseup)="onMouseUp($event)"
+            (dblclick)="onDblClick($event)"
+          ></canvas>
+
+        </div>
+
+        <mat-card-actions
+          class="xform-action-bg"
+          #actions
+        >
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            (click)="onTableListToggle()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >content_copy
+            </mat-icon>
+            <span><br>{{ showLeftColumn ? tlMsg2 : tlMsg1 }}</span>
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+            (click)="onRemove()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >
+              delete
+            </mat-icon>
+            <span><br>Remove</span>
+          </button>
+
+          <!-- 
+            [ngClass]="isEditDisabled() ? 'xbutton-off' : 'xbutton'"            
+          -->
+
+          <button
+            mat-button
+            type="button"
+            [ngClass]="isEditDisabled() ? 'xbutton-off' : 'xbutton'"     
+            (click)="onEdit()"
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >edit
+            </mat-icon>
+            <span><br>Edit</span>
+          </button>
+
+          <!-- 
+            [disabled]="removeIsDisabled"
+            [disabled]="editIsDisabled"
+            [disabled]="isSaveDisabled() ? true : null"
+            [disabled]="getDataIsDisabled"
+          -->
+          <button
+            mat-button
+            class="xbutton"
+
+            (click)="onSave($event)"  
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >save
+            </mat-icon>
+            <span><br>Save</span>
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            class="xbutton"
+
+            (click)="onGetData()"  
+          >
+            <mat-icon
+              inline=true
+              class="xbutton-icon"
+            >policy
+            </mat-icon>
+            <span><br>Show Data</span>
+          </button>
+
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+
+  </div>
+
+</section>
+
+
+

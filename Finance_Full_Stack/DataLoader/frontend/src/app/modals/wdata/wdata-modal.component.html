@@ -1,0 +1,178 @@
+<div
+    cdkDrag cdkDragRootElement=".cdk-overlay-pane"
+    fxLayout="column"
+    fxLayoutAlign="center center">
+
+    <h1 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ 'Data: ' + columnName }}</h1>
+
+    <p mat-dialog-title class="message">
+      {{ 'Source: ' + dColDef.dbTblColSource }}
+    </p>
+
+  <mat-dialog-content class="dialog-content">
+
+    <form [formGroup]="form">
+
+      <mat-form-field class="input-field">
+        <mat-label>Name</mat-label>
+        <input matInput
+          formControlName="name"
+        >
+        <p class="error-message" *ngIf="nameError">{{ nameError }}</p>
+      </mat-form-field>
+
+
+      <!-- 
+          <mat-form-field class="justification-select" appearance="fill">        
+      -->
+
+      <div class="control-row">
+
+        <div>
+          <mat-form-field class="justification-select">
+            <mat-label>Justification</mat-label>
+            <mat-select
+              formControlName="justSelect"
+              panelClass="xpanel"
+              (selectionChange)="justSelectionChange($event)"
+            >
+              <mat-option *ngFor="let just of justifications" [value]="just.val">
+                {{ just.view }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-checkbox
+            formControlName="doNotOutput"
+            class="right-checkbox"
+          >
+            Don't output
+          </mat-checkbox>
+        </div>
+        
+      </div>
+
+      <div
+        *ngIf="isNumeric"
+        class="control-row"
+      >
+
+        <div>
+        </div>
+
+        <div>
+          <mat-checkbox
+            formControlName="groupByCompatible"
+            class="right-checkbox groupby-compatible"
+          >
+            GroupBy compatible
+          </mat-checkbox>
+
+        </div>
+        
+      </div>
+
+      <div class="control-row">
+
+        <div>
+        </div>
+      
+        <button
+          mat-stroked-button
+          (click)="advancedClick($event)">
+          {{ advancedIsOpen ? 'Close advanced' : 'Open advanced' }}
+        </button>
+
+      </div>
+
+      <div
+        *ngIf="advancedIsOpen"
+        style="margin-top:0rem;"
+      >
+
+        <div class="control-row">
+
+          <div>
+            <mat-form-field class="db-type-select">
+              <mat-label>Database Datatype</mat-label>
+              <mat-select
+                formControlName="dbTypeSelect"
+                panelClass="xpanel"
+                (selectionChange)="dbTypeSelectionChange($event)"
+              >
+                <mat-option *ngFor="let dbTp of dbTypes" [value]="dbTp">
+                  {{ dbTp }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div>
+            <mat-checkbox
+              formControlName="downstramChange"
+              class="right-checkbox"
+            >
+              Downstream change required
+            </mat-checkbox>
+          </div>
+
+        </div>
+
+        <div class="control-row">
+
+          <div>
+            <mat-form-field class="db-type-select">
+              <mat-label>Dependent Columns</mat-label>
+              <mat-select
+                formControlName="dependentCols"
+                panelClass="xpanel"
+              >
+                <mat-option *ngFor="let dep of dependents" [value]="dep">
+                  {{ dep }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+
+            <mat-checkbox
+              formControlName="changeFixDate"
+              class="right-checkbox"
+              [ngClass]="integrityCheck()"
+            >
+              Adjusted to upstream change
+            </mat-checkbox>
+
+          </div>
+
+        </div>
+   
+      </div>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-dialog-actions class="dialog-actions">
+
+    <div>
+    </div>
+
+    <div class="dialog-ok-and-cancel">
+      <button mat-button (click)="cancelClick($event)">
+        Cancel
+      </button>
+
+      <button mat-button cdkFocusInitial (click)="okClick($event)">
+        OK
+      </button>
+    </div>
+
+  </mat-dialog-actions>
+</div>

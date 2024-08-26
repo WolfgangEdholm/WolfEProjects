@@ -1,0 +1,102 @@
+
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ data.dbTableName }}
+    </h4>
+
+    <div class="dialog-content">
+
+      <table
+        mat-table
+        class="table"
+        [dataSource]="tableSource"
+
+        matSort
+        [matSortActive]="sort?.active"
+        [matSortDirection]="sort?.direction"
+        (matSortChange)="sortChange($event)"
+      >
+        <ng-container matColumnDef="#">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="header-cell row-num"
+          >#
+          </th>
+          <td
+            mat-cell
+            class="row-num"
+            (click)="onSelectColumn(-1)"
+            *matCellDef="let item; let i = index;"
+            [ngClass]="indexStyle(i, item)"
+          > {{ !this.paginator ? 0 : (this.paginator.pageIndex === 0 ? i + 1
+               : 1 + i + this.paginator.pageIndex * this.paginator.pageSize)
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container
+          *ngFor="let column of fixedColumns let c = index"
+          [matColumnDef]="column"
+        >
+          <th mat-header-cell
+            class="header-cell"
+            [ngClass]="headerClass(c)"
+            mat-header-cell
+            mat-sort-header
+            *matHeaderCellDef
+          >{{ column | titlecase }}
+          </th>
+          <td mat-cell
+            [ngClass]="cellClass(c)"
+            [style.background-color]="c === selectedColCd ? 'lightgray' : ''"
+            mat-cell
+            (click)="onSelectColumn(c)"
+            *matCellDef="let row; let r = index"
+          >{{ cellIsNumber(c) ? (cellValue(row, c) | number:'0.0-2') :
+              cellValue(row, c) }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns2; sticky: true"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns2;"
+        ></tr>
+
+      </table>
+
+      <mat-paginator
+        [pageSize]="1000"
+        [pageSizeOptions]="[20, 40, 100, 1000]"
+      ></mat-paginator>
+
+    </div>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button
+          mat-button
+          cdkFocusInitial
+          (click)="md2.okClick($event)"
+        >OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

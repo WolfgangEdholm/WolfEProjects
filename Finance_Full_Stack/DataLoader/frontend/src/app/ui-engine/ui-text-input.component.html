@@ -1,0 +1,29 @@
+<div
+  [className]="css.xformFieldFrameClass()"
+  [ngStyle]="css.xformFieldFrameStyles()"
+>
+  <mat-form-field
+    [formGroup]="uie.forms[0]"
+    [appearance]="look"
+    class="xform-field"
+  >
+  <!-- 
+    <input
+      matInput
+      [formControlName]="fieldName"
+      [placeholder]="title"
+      [(value)]="currentValue"
+      [type]="type"
+      (ngModelChange)="onValueChange($event)"
+    >    
+  -->
+    <input
+      matInput
+      [formControlName]="fieldName"
+      [placeholder]="title"
+      [type]="type"
+      (ngModelChange)="onValueChange($event)"
+    >
+    <mat-error *ngIf="hasError()">{{ uie.errorMessage }}</mat-error>
+  </mat-form-field>
+</div>

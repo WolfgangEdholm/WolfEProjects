@@ -1,0 +1,57 @@
+@import "src/styles";
+
+.dialog {
+  margin-top: -24px;
+  display: flex;
+  flex-direction: column;
+}
+.dialog-title {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.dialog-content {
+  width: 100%;
+  //background: lightgreen;
+}
+
+.operator-select {
+  width: 100%;
+}
+
+.input-field {
+  width: 100%;
+  //background: yellow;
+}
+
+.xpanel {
+  //background: orange;
+  //height: 600px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  //min-width: 350px !important;
+  //max-width: 50vw !important;
+  max-height: 50vh !important;
+}
+
+.value-select {
+  width: 100%;
+}
+
+.dialog-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dialog-delete {
+  background: transparent;
+}
+
+.dialog-ok-and-cancel {
+  background: transparent;
+}

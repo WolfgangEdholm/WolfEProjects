@@ -1,0 +1,38 @@
+<section fxLayout="column" fxFlexAlign="stretch"> 
+  <div fxFlexAlign="center"> 
+    <p>Tests</p> 
+  </div>
+
+  <button mat-button (click)="test()">Open prompt</button>
+  <button mat-button (click)="confirm()">Open confirm</button>
+  <button mat-button (click)="alert()">Open alert</button>
+  <button mat-button (click)="message()">Open message</button>
+
+  <button mat-button (click)="saveTest({
+    modalTitle: 'aaa',
+    docName: 'bbb',
+    database: 'ccc' })"
+  >Save Test</button>
+
+  <button mat-button (click)="svTest({
+    modalTitle: 'aaa',
+    docName: 'bbb',
+    database: 'ccc' })"
+  >Sv Test</button>
+
+  <button mat-button (click)="growTest()"
+  >Grow Test</button>
+
+
+  <button mat-button (click)="margTest()"
+  >Marg Test</button>
+  
+  <button mat-button (click)="transResultsTest()"
+  >Trans Results Test</button>
+
+  <button mat-button (click)="showTableTest()"
+  >Show Table Query1</button>
+
+  <button mat-button (click)="showTable2Test()"
+  >Show Table2 Query1</button>
+</section>

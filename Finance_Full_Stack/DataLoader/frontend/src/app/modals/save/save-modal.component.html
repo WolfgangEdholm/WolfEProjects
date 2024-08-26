@@ -1,0 +1,121 @@
+
+
+<div
+  class="outer"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane" 
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="dialog">
+    <h4 mat-dialog-title class="dialog-title"
+      cdkDragHandle
+    >{{ data.modalTitle }}
+  </h4>
+
+    <form [formGroup]="form">
+      <div class="dialog-content">
+
+        <div>
+          <mat-checkbox
+            formControlName="makeCopy"
+          >
+            Copy Query
+          </mat-checkbox>
+        </div>
+
+        <mat-form-field>
+          <mat-label>Query Name</mat-label>
+          <input
+            matInput
+            formControlName="docName"
+            autocomplete="off"
+          >
+          <p
+            class="error-message"
+            *ngIf="docNameError"
+          >{{ docNameError }}</p>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Query Database</mat-label>
+          <mat-select
+            formControlName="docDbSelect"
+            panelClass="xpanel"
+            (selectionChange)="databaseSelectionChange($event)"
+          >
+            <mat-option *ngFor="let db of allDbNames" [value]="db">
+              {{ db }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div [ngClass]="g.formIsOutline ? 'doc-list' : 'doc-list-sq'">
+          <div *ngIf="currDocDbHasDoc()">
+            <div *ngFor="let dItem of currDocDb.items">
+              <span>{{ dItem.name }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 
+          <mat-form-field>
+            <mat-label>Data Out Table</mat-label>
+            <input
+              matInput
+              formControlName="dataOutName"
+              autocomplete="off"
+            >
+            <p
+              class="error-message"
+              *ngIf="dataOutNameError"
+            >{{ dataOutNameError }}</p>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Data Out Database</mat-label>
+            <mat-select
+              formControlName="dataOutDbSelect"
+              panelClass="xpanel"
+              (selectionChange)="databaseSelectionChange($event)"
+            >
+              <mat-option *ngFor="let dodb of data.dataOutDbs" [value]="dodb">
+                {{ dodb }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div [ngClass]="g.formIsOutline ? 'data-out-list' : 'data-out-list-sq'">
+            <div *ngIf="currDataOutDbHasDoc()">
+              <div *ngFor="let doItem of currDataOutDb.items">
+                <span>{{ doItem.name }}</span>
+              </div>
+            </div>
+          </div>
+        -->
+
+      </div>
+    </form>
+
+    <mat-dialog-actions class="dialog-actions">
+
+      <div>
+        <div class="dialog-delete">
+          <button mat-button (click)="deleteClick($event)">
+            Don't Save
+          </button>
+        </div>
+      </div>
+
+      <div class="dialog-ok-and-cancel">
+        <button mat-button (click)="cancelClick($event)">
+          Cancel
+        </button>
+
+        <button mat-button cdkFocusInitial (click)="okClick($event)">
+          OK
+        </button>
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+</div>

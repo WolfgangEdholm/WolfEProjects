@@ -1,0 +1,75 @@
+@import "../../../styles";
+
+.top-of-table {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0rem 1.5rem;
+}
+
+.table-title {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.filter-field {
+  background: transparent;
+}
+
+
+
+.table {
+  width: 100%;
+  overflow: auto;
+}
+
+.scroll-wrapper {
+  max-height: calc(100vh - 172px - #{$toolbar-height});
+  overflow: auto;
+}
+
+.cellError {
+  color: red;
+}
+
+.header-center {
+  // direction: rtl;
+  // padding-top: 22px;
+  // padding-bottom: 22px;
+
+  // display: flex;
+  // justify-content: center;
+  text-align: center;
+}
+
+.header-right {
+  direction: rtl;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  margin-right: 1rem;
+
+  display: flex;
+}
+
+.cell-center {
+  text-align: center;
+}
+
+.cell-right {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+th.mat-header-cell {
+  // text-align: center !important;
+  // justify-content: center !important;
+  max-width: 300px;
+  // background: lawngreen;
+}
+
+// special code from google&github to center headers
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+  // background: yellow;
+}

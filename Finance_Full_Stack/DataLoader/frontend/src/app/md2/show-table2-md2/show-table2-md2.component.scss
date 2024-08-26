@@ -1,0 +1,154 @@
+@import "src/styles";
+
+.outer {
+  box-sizing: border-box;
+  overflow: hidden;
+  resize: both;
+  min-width: 40rem;
+  min-height: 10rem;
+  max-width: 95vw;
+  max-height: 80vh;
+}
+
+.dialog {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 95vw;
+  max-height: 80vh;
+}
+
+.dialog-title {
+  max-width: 95vw;
+  max-height: 80vh;
+  min-width: 50rem;  // set min width here
+  width: 100%;
+  margin: 0;
+  margin-top: .3rem;
+  padding: 0;
+  text-align: center;
+}
+
+.dialog-content {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  // the .6 padding made scrolling text show above header
+  // padding: .6rem 1.6rem;
+  padding: .0rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: .9rem;
+  overflow: auto;
+}
+
+.dialog-actions {
+  box-sizing: border-box;
+  width: 100%;
+  // Don't know why 2.4rem bottom margin was necessary
+  padding: 0 1.6rem 0 1.6rem;
+  // margin: 0 1.6rem 2.4rem 1.6rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dialog-ok-and-cancel {
+  background: transparent;
+}
+
+// .center {
+//   //direction: rtl;
+//   justify-content: center;
+// }
+
+// .right {
+//   direction: rtl;
+//   //justify-content: center;
+//   //justify-content: flex-end;
+//   padding-right: 1rem;
+// }
+
+// .mat-column-writtenAt {
+//   flex: none;
+//   width: 11rem;
+// }
+
+// .mat-column-rowCount {
+//   flex: none;
+//   width: 3rem;
+//   justify-content: flex-end;
+//   padding-right: 1rem;
+// }
+
+// .mat-column-showTable {
+//   justify-content: center;
+// }
+
+// .index-col {
+//   flex: none;
+//   width: 2rem;
+// }
+
+.table {
+  width: 100%;
+  //overflow: auto;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.scroll-wrapper {
+  max-height: calc(100vh - 172px - #{$toolbar-height});
+  overflow: auto;
+}
+
+.cellError {
+  color: red;
+}
+
+// .header-center {
+//   // direction: rtl;
+//   padding-top: 22px;
+//   padding-bottom: 22px;
+
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .header-right {
+//   direction: rtl;
+//   padding-top: 22px;
+//   padding-bottom: 22px;
+//   margin-right: 1rem;
+
+//   display: flex;
+// }
+
+.cell-center {
+  text-align: center;
+}
+
+.cell-right {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+th.mat-header-cell {
+  // commented out line below to keep # to the left
+  // text-align: center !important;
+  // justify-content: center !important;
+  max-width: 300px;
+  //background: lawngreen;
+}
+
+// special code from google&github to center headers
+// doesn't work with 'no encapsulation'
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+  // background: yellow;
+}

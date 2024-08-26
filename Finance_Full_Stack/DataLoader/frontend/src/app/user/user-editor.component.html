@@ -1,0 +1,159 @@
+<section class="xsection">
+
+  <div class="data-wrapper" *ngIf="!eng.isLoading && uie.forms[0]">
+
+    <!-- left column -->
+    <div 
+      [fxFlex]="leftColumnSize + '%'"
+    >
+      <app-side-panel
+        #userList
+        topTitle="Users"
+        topIconName="people"
+        topIconColor="orangered"
+        topDrag="false"
+        [topIx]="spTopIx"
+        [topSelectCallback]="userSelectItem"
+        [topItemHeight]="2.5"
+      >
+      </app-side-panel>
+    </div>
+
+    <!-- right column -->
+    <div
+      [fxFlex]="rightColumnSize + '%'"
+      class="xcard-col-bg"
+    >
+      <mat-card
+        [className]="css.xcardBgClasses('xcard-col-right')"   
+        [ngStyle]="css.xcardBgStyles()"
+      >
+        <mat-card-title
+          [ngStyle]="css.xcardTitleStyles()"
+        >{{ fullName }}</mat-card-title>
+        <form 
+          class="xform"
+          [formGroup]="uie.forms[0]"
+          autocomplete="off"
+          (ngSubmit)="onSubmit()"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <mat-card-content class="xform">
+
+            <div class="xform-row">
+              <app-text-input
+                fieldName="firstName"
+                title="First Name"
+                (valueChange)="onInputChange($event)"
+                class="wd30">
+              </app-text-input>
+
+              <app-text-input
+                fieldName="middleName"
+                title="Middle Name"
+                (valueChange)="onInputChange($event)"
+                class="wd30">
+              </app-text-input>
+
+              <app-text-input
+                fieldName="lastName"
+                title="Last Name"
+                (valueChange)="onInputChange($event)"
+                class="wd30">
+              </app-text-input>
+
+              <app-text-input
+                fieldName="suffix"
+                title="Suffix"
+                (valueChange)="onInputChange($event)"
+                class="wd10">
+              </app-text-input>
+            </div>
+
+            <div class="xform-row">
+              <app-text-input
+              fieldName="phoneNumber"
+              title="Phone"
+              class="wd30">
+            </app-text-input>
+
+              <app-text-input
+                fieldName="notificationEmail"
+                title="Notification Email"
+                class="wd40">
+              </app-text-input>
+
+              <app-text-input
+                fieldName="email"
+                title="Email"
+                class="wd30">
+              </app-text-input>
+            </div> 
+
+            <div class="xform-row">
+              <app-date-input
+                fieldName="dateJoined"
+                title="Date Joined"
+                class="wd30">
+              </app-date-input>
+
+              <app-multi-select-input
+                fieldName="roles"
+                title="Roles"
+                [selectList] = "roleList"
+                class="wd70">
+              </app-multi-select-input>
+            </div>
+
+            <div class="xform-row">
+              <app-multi-select-input
+                fieldName="permissions"
+                title="Permissions"
+                [selectList] = "permissionList"
+                class="wd100">
+              </app-multi-select-input>
+            </div>
+
+          </mat-card-content>
+
+          <mat-card-actions class="xform-action-bg">
+
+            <button
+              mat-button
+              type="button"
+              class="xbutton"
+              color="warn"
+              (click)="onDelete()"
+            >
+              <mat-icon inline=true class="xbutton-icon">delete</mat-icon>
+              <span><br>Delete</span>
+            </button>
+
+            <button
+              mat-button
+              type="button"
+              class="xbutton"
+              (click)="onAdd()"
+            >
+              <mat-icon inline=true class="xbutton-icon">add</mat-icon>
+              <span><br>Add</span>
+            </button>
+
+            <button
+              mat-button
+              class="xbutton"
+            >
+              <mat-icon inline=true class="xbutton-icon">save</mat-icon>
+              <span><br>Save</span>
+            </button>
+
+          </mat-card-actions>
+        </form>
+      </mat-card>
+    </div>
+
+  </div>
+
+</section>

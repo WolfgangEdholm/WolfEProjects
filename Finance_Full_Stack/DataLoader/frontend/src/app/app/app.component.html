@@ -1,0 +1,90 @@
+<mat-toolbar #toolbar color="primary">
+  <div>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+  </div>
+  <div>
+
+    <a routerLink="/home">{{ app }}</a>      
+
+    <!--
+    <a routerLink="/home">{{ app }}</a>
+    -->
+  </div>
+  <div class="app-section">
+    <p>{{ g.getAppSection() }}</p>
+  </div>
+
+  <div fxFlex fxLayout fxLayoutAlign="end">
+    <button
+      mat-button
+      class="toolbar-item"
+      [matMenuTriggerFor]="menu"
+    >
+      Look
+    </button>
+    <mat-menu #menu="matMenu" overlapTrigger="false">
+
+      <button
+        mat-menu-item
+        [class.menu-item-selected]="1 === css.lookId"
+        (click)="css.setLook(1)"
+      >
+        <mat-icon [class.menu-item-selected]="1 === css.lookId"
+        >crop_16_9</mat-icon>
+        <span>Card</span>
+      </button>
+
+      <button
+        mat-menu-item
+        [class.menu-item-selected]="2 === css.lookId"
+        (click)="css.setLook(2)"
+      >
+        <mat-icon [class.menu-item-selected]="2 === css.lookId"
+        >calendar_view_day</mat-icon>
+        <span>Flat</span>
+      </button>
+
+      <button
+      mat-menu-item
+      [class.menu-item-selected]="3 === css.lookId"
+      (click)="css.setLook(3)"
+      >
+        <mat-icon [class.menu-item-selected]="3 === css.lookId"
+        >calendar_view_day</mat-icon>
+        <span>Flat With Border</span>
+      </button>
+
+    </mat-menu>
+  </div>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list
+        *ngFor="let navItem of navItems">
+      <a
+        [ngClass]="navItem.name[0] === '-' ?
+          'sn-underlined-item' : 'sn-item'"
+        mat-list-item
+        [routerLink]="navItem.routerLinkUrl"
+        routerLinkActive="is-active"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="nav-icon">{{ navItem.icon }}</mat-icon>
+        <div class="nav-item">
+          <span>{{ navItem.name[0] === '-'
+                     ? navItem.name.substring(1)
+                     : navItem.name }}</span>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet ></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
